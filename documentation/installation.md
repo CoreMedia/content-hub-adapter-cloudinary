@@ -24,7 +24,7 @@ Depending on what you are setup and your plans, you can integrate this project i
 
 ## Release Download
 
-Go to [Release](https://github.com/CoreMedia/<PROJECT_REPO>/releases) and download the version that matches you CMCC release version.
+Go to [Release](https://github.com/CoreMedia/content-hub-adapter-cloudinary/releases) and download the version that matches you CMCC release version.
 
 From the Blueprint workspace's root folder, extract the ZIP file into `modules/extensions`.
 
@@ -37,7 +37,7 @@ From the Blueprint workspace's root folder, clone this repository or your fork a
 ```
 $ mkdir -p modules/extensions
 $ cd modules/extensions
-$ git submodule add https://github.com/<YOUR_ORGANIZATION>/<PROJECT_REPO>.git <PROJECT_REPO>
+$ git submodule add https://github.com/CoreMedia/content-hub-adapter-cloudinary.git content-hub-adapter-cloudinary
 $ git submodule init
 $ git checkout -b <your-branch-name>
 ```
