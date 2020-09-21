@@ -4,6 +4,7 @@ package com.coremedia.blueprint.contenthub.adapters.cloudinary;
 import com.coremedia.blueprint.contenthub.adapters.cloudinary.rest.CloudinaryCategory;
 import com.coremedia.contenthub.api.ContentHubContext;
 import com.coremedia.contenthub.api.ContentHubObjectId;
+import com.coremedia.contenthub.api.ContentHubType;
 import com.coremedia.contenthub.api.Folder;
 import edu.umd.cs.findbugs.annotations.NonNull;
 import edu.umd.cs.findbugs.annotations.Nullable;
