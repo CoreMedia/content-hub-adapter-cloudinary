@@ -1,6 +1,6 @@
 ![CoreMedia Labs Logo](https://documentation.coremedia.com/badges/banner_coremedia_labs_wide.png "CoreMedia Labs Logo")
 
-![CoreMedia Content Cloud Version](https://img.shields.io/static/v1?message=2004.1&label=CoreMedia%20Content%20Cloud&style=for-the-badge&labelColor=666666&color=672779 
+![CoreMedia Content Cloud Version](https://img.shields.io/static/v1?message=2007&label=CoreMedia%20Content%20Cloud&style=for-the-badge&labelColor=666666&color=672779 
 "This badge shows the CoreMedia version this project is compatible with. 
 Please read the versioning section of the project to see what other CoreMedia versions are supported and how to find them."
 )
@@ -14,29 +14,18 @@ If a project is inactive it means that the development has been discontinued and
 This badge type shows the version number that is required for the selected project version."
 )
 
-> **Open TODO's**
-> 1. Search for further blockquotes in the documentation. They have to be replaced by real documentation.
-> 2. Take screenshots and add them to the documentation
-> 3. FIX ContentWriteInterceptorException for images having the wrong mime type while not
+# Content Hub Adapter for Cloudinary
 
-# content-hub-adapter-cloudinary
-
-> If possible, the project name should be prefixed with name of the CoreMedia feature it supports, e.g.:
->
-> * `content-hub-adapter-<THIRD_PARTY_NAME>`
-> * `feedback-hub-adapter-<THIRD_PARTY_NAME>`
->
-> An additional abstract and feature list should be provided here.
+The **content-hub-adapter-cloudinary** extension is providing access to content of a Cloudinary Account via configuration. 
+Content stored in Cloudinary is available as an additional tree inside the studio instance after a successful configuration of the content-hub-adapter.
 
 ## Versioning
 
-> Change this note if you prefer a different versioning:
->
->To find out which CoreMedia versions are `supported by this project, please take look at the releases section or on the existing branches. To find the matching version of your CoreMedia system, please checkout the branch with the corresponding name. For example, if your CoreMedia version is 2001.2, checkout the branch 2001.2.
+To find out which CoreMedia versions are supported by this project, please take look at the releases section or on the existing branches. To find the matching version of your CoreMedia system, please checkout the branch with the corresponding name. For example, if your CoreMedia version is 2007.2, checkout the branch cmcc-10-2007.
 
 ## Documentation & Tutorial
 
-* **[Documentation](documentation/README.md)**
+* **[Documentation](docs/README.md)**
 
     for guides for editors, administrators and developers    
 

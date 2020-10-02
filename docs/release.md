@@ -88,8 +88,8 @@
 > Assuming all branches (master, develop, ci/develop) already exist, proceed as follows:
 >
 > ```bash
-> $ git clone https://github.com/CoreMedia/content-hub-adapter-cloudinary.git
-> $ cd content-hub-adapter-cloudinary
+> $ git clone https://github.com/CoreMedia/<PROJECT_NAME>.git
+> $ cd <PROJECT_NAME>
 > $ git checkout --track "origin/develop"
 > # ... perform required updates ...
 > $ git commit --all --message="Fixed #1"
