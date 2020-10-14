@@ -17,7 +17,11 @@ This badge type shows the version number that is required for the selected proje
 # Content Hub Adapter for Cloudinary
 
 The **content-hub-adapter-cloudinary** extension is providing access to content of a Cloudinary Account via configuration. 
-Content stored in Cloudinary is available as an additional tree inside the studio instance after a successful configuration of the content-hub-adapter.
+Content stored in Cloudinary is available as an additional tree inside the studio instance after a successful configuration of the content-hub-adapter. The 
+types of content working with this adapter are:
+- Images
+- Videos
+
 
 ## Versioning
 
