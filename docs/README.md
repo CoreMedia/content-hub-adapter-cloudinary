@@ -14,13 +14,9 @@
 
     Read this if you are contributing to the project.
     
-> 1. [Manual Tests](manual-tests.md)
->
->   Read this to re-test your changes.
->
-> 2. [Release (CoreMedia-only)](release.md)
->
->   Read this if you are creating a release of this project.
+1. [Release](release.md)
+
+   Read this if you are creating a release of this project.
 
 ## See Also
 
