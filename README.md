@@ -23,7 +23,7 @@ To find out which CoreMedia versions are supported by this project, please take 
 
 ## Documentation & Tutorial
 
-* **[Documentation](documentation/README.md)**
+* **[Documentation](docs/README.md)**
 
     for guides for editors, administrators and developers    
 
