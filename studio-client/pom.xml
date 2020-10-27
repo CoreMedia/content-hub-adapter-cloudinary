@@ -9,6 +9,7 @@
     <version>1-SNAPSHOT</version>
   </parent>
 
+  <groupId>com.coremedia.blueprint.contenthub</groupId>
   <artifactId>studio-client.content-hub-adapter-cloudinary</artifactId>
   <packaging>swc</packaging>
 
