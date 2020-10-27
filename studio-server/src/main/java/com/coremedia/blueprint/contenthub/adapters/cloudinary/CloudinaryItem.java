@@ -187,12 +187,20 @@ class CloudinaryItem extends CloudinaryHubObject implements Item {
   }
 
   @Override
-  public boolean equals(Object obj) {
-    if (obj instanceof CloudinaryItem) {
-      CloudinaryItem item = (CloudinaryItem) obj;
-      return item.asset.getId().equals(this.asset.getId());
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
     }
-    return false;
+    if (!(o instanceof CloudinaryItem)) {
+      return false;
+    }
+    CloudinaryItem that = (CloudinaryItem) o;
+    return asset.equals(that.asset);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(asset);
   }
 
   public CloudinaryAsset getAsset() {

@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * 0 = {java.util.HashMap$Node@22265} "bytes" -> "2298695"
@@ -159,5 +160,22 @@ public class CloudinaryAsset {
     }
 
     return resourceType + "/" + format;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    CloudinaryAsset that = (CloudinaryAsset) o;
+    return id.equals(that.id);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(id);
   }
 }
