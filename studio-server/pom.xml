@@ -21,6 +21,20 @@
         <type>pom</type>
         <scope>import</scope>
       </dependency>
+      <dependency>
+        <groupId>com.coremedia.cms</groupId>
+        <artifactId>studio-server-thirdparty-for-plugins-bom</artifactId>
+        <version>1-SNAPSHOT</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>com.coremedia.cms</groupId>
+        <artifactId>common-core-bom</artifactId>
+        <version>1-SNAPSHOT</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
     </dependencies>
   </dependencyManagement>
 
