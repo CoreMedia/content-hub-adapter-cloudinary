@@ -9,6 +9,11 @@
   <packaging>swc</packaging>
   <description>Studio Plugin for the Content Hub's Cloudinary Adapter</description>
 
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+  </properties>
+
   <organization>
     <name>Blueprint</name>
   </organization>
