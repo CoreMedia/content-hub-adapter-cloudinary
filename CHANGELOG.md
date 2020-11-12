@@ -1,27 +1,9 @@
 Changelog
 ================================================================================
 
-2007
+2010.1-1
 --------------------------------------------------------------------------------
 
-### Main Changes
+### Initial Release 🥳
 
-* Initial project
-
-<!--
-### General Notes 
-
-* Update 
-
-
-2004
---------------------------------------------------------------------------------
-
-### Main Changes
-
-* Initial project
-
-<!--
-### General Notes 
-
-* Minor changes
+Basic implementation of the Content Hub API.
