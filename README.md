@@ -10,7 +10,7 @@ If a project is inactive it means that the development has been discontinued and
 
 # Content Hub Adapter for Cloudinary
 
-The **content-hub-adapter-cloudinary** plugin is providing access to content of a Cloudinary repository via configuration. 
+The **content-hub-adapter-cloudinary** plugin provides access to content of a Cloudinary repository. 
 Content stored in Cloudinary is available as an additional tree in the Studio library. The 
 types of content working with this adapter are:
 - Images
