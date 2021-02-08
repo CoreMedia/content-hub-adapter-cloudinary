@@ -5,13 +5,14 @@
 
   <groupId>com.coremedia.blueprint.contenthub</groupId>
   <artifactId>studio-client.content-hub-adapter-cloudinary</artifactId>
-  <version>1-SNAPSHOT</version>
+  <version>1.0.0-SNAPSHOT</version>
   <packaging>swc</packaging>
   <description>Studio Plugin for the Content Hub's Cloudinary Adapter</description>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <studio-client.version>2101.1</studio-client.version>
   </properties>
 
   <organization>
@@ -23,14 +24,14 @@
       <dependency>
         <groupId>com.coremedia.cms</groupId>
         <artifactId>studio-client-core-bom</artifactId>
-        <version>1-SNAPSHOT</version>
+        <version>${studio-client.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
       <dependency>
         <groupId>com.coremedia.cms</groupId>
         <artifactId>studio-client-thirdparty-bom</artifactId>
-        <version>1-SNAPSHOT</version>
+        <version>${studio-client.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>

@@ -4,15 +4,15 @@
 
   <groupId>com.coremedia.blueprint.contenthub</groupId>
   <artifactId>studio-server.content-hub-adapter-cloudinary</artifactId>
-  <version>1-SNAPSHOT</version>
+  <version>1.0.0-SNAPSHOT</version>
 
   <properties>
     <maven.compiler.release>11</maven.compiler.release>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <cloudinary.version>1.26.0</cloudinary.version>
-    <cm.studio-server.core.version>1-SNAPSHOT</cm.studio-server.core.version>
-    <cm.common.core.version>1-SNAPSHOT</cm.common.core.version>
+    <cm.studio-server.core.version>2101.1</cm.studio-server.core.version>
+    <cm.common.core.version>2101.1</cm.common.core.version>
   </properties>
 
   <dependencyManagement>
