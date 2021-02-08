@@ -9,55 +9,49 @@
 ## Table of Content
 
 1. [Introduction](#introduction)
-1. [Release Download](#release-download)
-2. [Git Submodule](#git-submodule)
-3. [Activate the extension](#activate-the-extension)
+1. [Use Git](#use-git)
+2. [Download Release](#download-release)
+3. [Activate the Plugin](#activate-the-plugin)
 4. [Intellij IDEA Hints](#intellij-idea-hints)
 
 ## Introduction
 
-Depending on what you are setup and your plans, you can integrate this project in different ways.
+Depending on your setup and your plans, you can integrate this project in different ways.
 
-* If you want to use the extension in your project, then it is recommended to fork the repository and integrate it as described in [Git Submodule](#git-submodule).
-* If you do not want to use GitHub, proceed as described in [Release Download](#release-download).
-* If you just want to contribute a new feature or a bugfix to the extension, you will need to work with the [Git Submodule](#git-submodule). As an external developer you will still need a fork of the repository to create a Pull Request. 
+* If you want to use the plugin in your project, clone or fork the repository.
+* If you do not want to use GitHub, proceed as described in [Download Release](#download-release).
+* If you want to contribute a new feature or a bugfix, as an external developer, you need a fork of the repository to create a Pull Request. 
 
-## Release Download
+## Use Git 
+
+Clone this repository or your fork. Make sure to use the suitable branch 
+for your workspace version (see [README](../README.md)). A fork is required if
+you plan to customize the plugin.
+
+Continue with [Activate the plugin](#activate-the-plugin).
+
+## Download Release
 
 Go to [Release](https://github.com/CoreMedia/content-hub-adapter-cloudinary/releases) and download the version that matches your CMCC release version.
+The ZIP file provides the Maven workspace of the plugin.
 
-From the Blueprint workspace root folder, extract the ZIP file into `modules/extensions`.
+## Activate the Plugin
 
-Continue with [Activate the extension](#activate-the-extension).
+The cloudinary contenthub adapter is a plugin for studio-server and studio-client.
+The deployment of plugins is described [here](https://documentation.coremedia.com/cmcc-10/artifacts/2101/webhelp/coremedia-en/content/ApplicationPlugins.html).
 
-## Git Submodule
-The first step to enable the extension, please ensure that the following maven modules are present:
-* <WORKSPACE_ROOT>/modules (root pom as parent, packaging pom)
-* <WORKSPACE_ROOT/modules/extensions (modules as parent, packaging pom)
+In short, for a quick development roundtrip: 
+1. Build your Blueprint.
+2. Build the `content-hub-adapter-cloudinary` plugin with `mvn clean install`.
+   Checkpoint: There should be zip files in the target directories of the `studio-client` and `studio-server` modules now.
+3. Create a directory for studio-server plugins, e.g. `/tmp/studio-server-plugins`, 
+and copy `content-hub-adapter-cloudinary/studio-server/target/studio-server.content-hub-adapter-cloudinary-<version>.zip`
+into that directory.
+4. Start the studio server as usual, e.g. `mvn spring-boot:run`, with an additional property `-Dplugins.directory=/tmp/studio-server-plugins`
+5. Start the studio client with an additional property `-DadditionalPackagesDirs=/.../content-hub-adapter-cloudinary/studio-client/target/app`
 
-From the Blueprint workspace root folder, clone this repository or your fork as a submodule into the extension folder. Make sure to use the branch name that matches your workspace version. A fork is required if you plan to customize the extension.
-
-```
-$ cd modules/extensions
-$ git submodule add https://github.com/CoreMedia/content-hub-adapter-cloudinary.git content-hub-adapter-cloudinary
-$ git submodule init
-$ git checkout -b content-hub-adapter-cloudinary
-```
-
-Continue with [Activate the extension](#activate-the-extension).
-
-## Activate the Extension
-
-In order to activate the extension, you need to configure the extension tool. The configuration for the tool can be found under `workspace-configuration/extensions`. Make sure that you use at least version 4.0.1 of the extension tool and that you have adjusted the `<groupId>` and `<version>` so that they match your Blueprint workspace.
-After adapting the configuration run the extension tool in
-`workspace-configuration/extensions` by executing:
-
-```bash
-$ mvn extensions:sync
-$ mvn extensions:sync -Denable=content-hub-adapter-cloudinary
-``` 
-
-This will activate the extension. The extension tool will also set the relative path for the parents of the extension modules.
+Now the plugin is running.  You won't yet notice it though, until you configure a connection 
+and restart the studio server.  
 
 ## Intellij IDEA Hints
 

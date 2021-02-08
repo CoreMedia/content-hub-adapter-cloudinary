@@ -21,7 +21,7 @@
 
 ## Introducing
 
-As mentioned in the main documentation, the coremedia-content-hub-cloudinary extension
+As mentioned in the main documentation, the coremedia-content-hub-cloudinary plugin
 is providing access to a configurable Cloudinary account. Common to all
 content-hub-adapters is the appearance in CoreMedia studio. The image below is showing 
 multiple configured content-hub-adapters in Studio (content-hub-adapter-cloudinary is marked with a blue background).
