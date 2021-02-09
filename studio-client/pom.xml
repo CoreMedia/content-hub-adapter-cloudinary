@@ -12,6 +12,7 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <jangaroo.version>4.0.76</jangaroo.version>
     <studio-client.version>2101.1</studio-client.version>
   </properties>
 
@@ -43,30 +44,35 @@
       <groupId>com.coremedia.blueprint.base</groupId>
       <artifactId>bpbase-studio-components</artifactId>
       <type>swc</type>
+      <scope>provided</scope>
     </dependency>
 
     <dependency>
       <groupId>com.coremedia.ui.toolkit</groupId>
       <artifactId>ui-components</artifactId>
       <type>swc</type>
+      <scope>provided</scope>
     </dependency>
 
     <dependency>
       <groupId>com.coremedia.ui.sdk</groupId>
       <artifactId>editor-components</artifactId>
       <type>swc</type>
+      <scope>provided</scope>
     </dependency>
 
     <dependency>
       <groupId>com.coremedia.ui.sdk</groupId>
       <artifactId>content-hub-editor-components</artifactId>
       <type>swc</type>
+      <scope>provided</scope>
     </dependency>
 
     <dependency>
       <groupId>net.jangaroo</groupId>
       <artifactId>ext-as</artifactId>
       <type>swc</type>
+      <scope>provided</scope>
     </dependency>
   </dependencies>
 
@@ -75,7 +81,7 @@
       <plugin>
         <groupId>net.jangaroo</groupId>
         <artifactId>jangaroo-maven-plugin</artifactId>
-        <version>4.0.73</version>
+        <version>${jangaroo.version}</version>
         <extensions>true</extensions>
         <configuration>
           <namespaces>
@@ -84,6 +90,13 @@
             </namespace>
           </namespaces>
         </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>package-plugin</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>
