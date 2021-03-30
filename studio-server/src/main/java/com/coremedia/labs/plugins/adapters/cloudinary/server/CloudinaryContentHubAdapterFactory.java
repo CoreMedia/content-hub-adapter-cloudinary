@@ -1,4 +1,4 @@
-package com.coremedia.blueprint.contenthub.adapters.cloudinary;
+package com.coremedia.labs.plugins.adapters.cloudinary.server;
 
 import com.coremedia.contenthub.api.ContentHubAdapter;
 import com.coremedia.contenthub.api.ContentHubAdapterFactory;

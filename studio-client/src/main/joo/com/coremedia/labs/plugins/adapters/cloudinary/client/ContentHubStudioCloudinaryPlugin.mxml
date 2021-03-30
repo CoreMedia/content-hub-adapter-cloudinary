@@ -6,7 +6,7 @@
         xmlns:editor="exml:com.coremedia.cms.editor.sdk.config">
   <fx:Metadata>
     [ResourceBundle('com.coremedia.contenthub.ContentHub')]
-    [ResourceBundle('com.coremedia.blueprint.studio.contenthub.cloudinary.ContentHubCloudinary')]
+    [ResourceBundle('com.coremedia.labs.plugins.adapters.cloudinary.client.ContentHubCloudinary')]
   </fx:Metadata>
   <fx:Script><![CDATA[
     import mx.resources.ResourceManager;
@@ -19,7 +19,7 @@
   <editor:configuration>
     <editor:CopyResourceBundleProperties
             destination="{ResourceManager.getInstance().getResourceBundle(null, 'com.coremedia.contenthub.ContentHub')}"
-            source="{ResourceManager.getInstance().getResourceBundle(null, 'com.coremedia.blueprint.studio.contenthub.cloudinary.ContentHubCloudinary')}"/>
+            source="{ResourceManager.getInstance().getResourceBundle(null, 'com.coremedia.labs.plugins.adapters.cloudinary.client.ContentHubCloudinary')}"/>
   </editor:configuration>
 
 

@@ -1,9 +1,17 @@
-package com.coremedia.blueprint.contenthub.adapters.cloudinary;
+package com.coremedia.labs.plugins.adapters.cloudinary.server;
 
-import com.coremedia.blueprint.contenthub.adapters.cloudinary.rest.CloudinaryAsset;
 import com.coremedia.cap.common.Blob;
-import com.coremedia.contenthub.api.*;
+import com.coremedia.contenthub.api.ContentCreationUtil;
+import com.coremedia.contenthub.api.ContentHubAdapter;
+import com.coremedia.contenthub.api.ContentHubContext;
+import com.coremedia.contenthub.api.ContentHubObject;
+import com.coremedia.contenthub.api.ContentHubTransformer;
+import com.coremedia.contenthub.api.ContentModel;
+import com.coremedia.contenthub.api.ContentModelReference;
+import com.coremedia.contenthub.api.Item;
+import com.coremedia.contenthub.api.UrlBlobBuilder;
 import com.coremedia.cotopaxi.common.blobs.BlobServiceImpl;
+import com.coremedia.labs.plugins.adapters.cloudinary.server.rest.CloudinaryAsset;
 import com.coremedia.mimetype.TikaMimeTypeService;
 import com.coremedia.util.TempFileFactory;
 import edu.umd.cs.findbugs.annotations.NonNull;
@@ -73,8 +81,7 @@ class CloudinaryContentHubTransformer implements ContentHubTransformer {
 
   @Nullable
   private String extractDescription(@Nullable CloudinaryAsset asset) {
-    String description = asset == null ? null : HtmlUtils.htmlUnescape(asset.getFolder());
-    return description;
+    return asset == null ? null : HtmlUtils.htmlUnescape(asset.getFolder());
   }
 
   @Nullable
@@ -85,9 +92,11 @@ class CloudinaryContentHubTransformer implements ContentHubTransformer {
     try {
       InputStream stream = item.stream();
       BlobServiceImpl blobService = new BlobServiceImpl(new TempFileFactory(), getTika());
-      Blob blob = blobService.fromInputStream(stream, getTika().getMimeTypeForResourceName(item.getName()));
+      Blob blob = blobService.fromInputStream(stream, getTika().getMimeTypeForResourceName(item.getName() + "." + item.getFormat()));
       result.put("data", blob);
-      stream.close();
+      if (stream != null) {
+        stream.close();
+      }
       return result;
     } catch (IOException | MimeTypeParseException e) {
       e.printStackTrace();

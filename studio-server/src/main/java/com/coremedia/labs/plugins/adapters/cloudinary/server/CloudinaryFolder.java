@@ -1,7 +1,7 @@
-package com.coremedia.blueprint.contenthub.adapters.cloudinary;
+package com.coremedia.labs.plugins.adapters.cloudinary.server;
 
 
-import com.coremedia.blueprint.contenthub.adapters.cloudinary.rest.CloudinaryCategory;
+import com.coremedia.labs.plugins.adapters.cloudinary.server.rest.CloudinaryCategory;
 import com.coremedia.contenthub.api.ContentHubContext;
 import com.coremedia.contenthub.api.ContentHubObjectId;
 import com.coremedia.contenthub.api.ContentHubType;
@@ -17,17 +17,14 @@ class CloudinaryFolder extends CloudinaryHubObject implements Folder {
   private String name;
   private CloudinaryFolder parent;
   private List<CloudinaryItem> childItems = new ArrayList<>();
-  private CloudinaryService service;
 
-  CloudinaryFolder(CloudinaryService service, ContentHubContext context, ContentHubObjectId id, String name) {
+  CloudinaryFolder(ContentHubContext context, ContentHubObjectId id, String name) {
     super(id, context);
     this.name = name;
-    this.service = service;
   }
 
-  CloudinaryFolder(CloudinaryService service, ContentHubContext context, ContentHubObjectId id, CloudinaryCategory category, @Nullable CloudinaryFolder parent) {
+  CloudinaryFolder(ContentHubContext context, ContentHubObjectId id, CloudinaryCategory category, @Nullable CloudinaryFolder parent) {
     super(id, context);
-    this.service = service;
     this.category = category;
     this.parent = parent;
   }
@@ -48,18 +45,6 @@ class CloudinaryFolder extends CloudinaryHubObject implements Folder {
   }
 
 
-  @Nullable
-  public Map<String, Object> getMetaData() {
-    Map<String, Object> data = new HashMap<>();
-    if (getCategory() != null) {
-      data.put("path", "/" + getCategory().getPath());
-    }
-    else {
-      data.put("path", "/");
-    }
-    return data;
-  }
-
   @NonNull
   @Override
   public String getName() {
@@ -78,23 +63,6 @@ class CloudinaryFolder extends CloudinaryHubObject implements Folder {
   @Override
   public String getDisplayName() {
     return getName();
-  }
-
-  @Nullable
-  public Date getLastModified() {
-    if (category != null) {
-      return category.getLastModified();
-    }
-    return null;
-  }
-
-  @Nullable
-  public String getManagementUrl() {
-    String url = FOLDER_BASE_URL + ASSET_TYPE_IMAGES;
-    if (getCategory() != null) {
-      url = url + "/" + getCategory().getPath();
-    }
-    return url;
   }
 
   public void setChildItems(List<CloudinaryItem> childItems) {

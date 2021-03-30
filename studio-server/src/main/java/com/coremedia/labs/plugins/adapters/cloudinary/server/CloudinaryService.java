@@ -1,11 +1,11 @@
-package com.coremedia.blueprint.contenthub.adapters.cloudinary;
+package com.coremedia.labs.plugins.adapters.cloudinary.server;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.api.exceptions.NotFound;
 import com.cloudinary.api.exceptions.RateLimited;
 import com.cloudinary.utils.ObjectUtils;
-import com.coremedia.blueprint.contenthub.adapters.cloudinary.rest.CloudinaryAsset;
-import com.coremedia.blueprint.contenthub.adapters.cloudinary.rest.CloudinaryCategory;
+import com.coremedia.labs.plugins.adapters.cloudinary.server.rest.CloudinaryAsset;
+import com.coremedia.labs.plugins.adapters.cloudinary.server.rest.CloudinaryCategory;
 import com.coremedia.contenthub.api.exception.ContentHubException;
 import org.apache.commons.io.IOUtils;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -17,6 +17,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.InputStream;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -26,7 +27,7 @@ import java.util.Map;
 public class CloudinaryService {
 
   private static final Logger LOG = LoggerFactory.getLogger(CloudinaryService.class);
-  private Cloudinary cloudinary;
+  private final Cloudinary cloudinary;
 
   public CloudinaryService(Cloudinary cloudinary) {
     this.cloudinary = cloudinary;
@@ -35,8 +36,8 @@ public class CloudinaryService {
   public List<CloudinaryCategory> getRootFolders() {
     List<CloudinaryCategory> result = new ArrayList<>();
     try {
-      List<Map> folders = (List<Map>) cloudinary.api().rootFolders(getDefaultOptions()).get("folders");
-      for (Map folder : folders) {
+      List<Map<String, Object>> folders = (List<Map<String, Object>>) cloudinary.api().rootFolders(getDefaultOptions()).get("folders");
+      for (Map<String, Object> folder : folders) {
         result.add(new CloudinaryCategory(folder));
       }
     } catch (Exception e) {
@@ -48,8 +49,8 @@ public class CloudinaryService {
   public List<CloudinaryCategory> getSubFolders(String path) {
     List<CloudinaryCategory> result = new ArrayList<>();
     try {
-      List<Map> folders = (List<Map>) cloudinary.api().subFolders(path, getDefaultOptions()).get("folders");
-      for (Map folder : folders) {
+      List<Map<String, Object>> folders = (List<Map<String, Object>>) cloudinary.api().subFolders(path, getDefaultOptions()).get("folders");
+      for (Map<String, Object> folder : folders) {
         result.add(new CloudinaryCategory(folder));
       }
     } catch (Exception e) {
@@ -61,12 +62,12 @@ public class CloudinaryService {
   public List<CloudinaryAsset> getAssets  (String path, boolean filter) {
     List<CloudinaryAsset> result = new ArrayList<>();
     try {
-      List<Map> collectedItems = new ArrayList<>();
-      List<Map> items = (List<Map>) cloudinary.api().resources(ObjectUtils.asMap("type", "upload", "prefix", path, "resource_type", "image")).get("resources");
+      List<Map<String, Object>> collectedItems = new ArrayList<>();
+      List<Map<String, Object>> items = (List<Map<String, Object>>) cloudinary.api().resources(ObjectUtils.asMap("type", "upload", "prefix", path, "resource_type", "image")).get("resources");
       collectedItems.addAll(items);
-      items = (List<Map>) cloudinary.api().resources(ObjectUtils.asMap("type", "upload", "prefix", path, "resource_type", "raw")).get("resources");
+      items = (List<Map<String, Object>>) cloudinary.api().resources(ObjectUtils.asMap("type", "upload", "prefix", path, "resource_type", "raw")).get("resources");
       collectedItems.addAll(items);
-      items = (List<Map>) cloudinary.api().resources(ObjectUtils.asMap("type", "upload", "prefix", path, "resource_type", "video")).get("resources");
+      items = (List<Map<String, Object>>) cloudinary.api().resources(ObjectUtils.asMap("type", "upload", "prefix", path, "resource_type", "video")).get("resources");
       collectedItems.addAll(items);
 
       for (Map collectedItem : collectedItems) {
@@ -106,7 +107,7 @@ public class CloudinaryService {
   }
 
 
-  private Map getDefaultOptions() {
+  private Map<String, Object> getDefaultOptions() {
     Map<String, Object> options = new HashMap<>();
     options.put("return_error", true);
     return options;
@@ -114,8 +115,8 @@ public class CloudinaryService {
 
   private CloudinaryAsset getAsset(String externalId, String resourceType) {
     try {
-      String id = URLEncoder.encode(externalId, "utf8");
-      Map resource = cloudinary.api().resource(id, ObjectUtils.asMap("resource_type", resourceType));
+      String id = URLEncoder.encode(externalId, StandardCharsets.UTF_8);
+      Map<String, Object> resource = cloudinary.api().resource(id, ObjectUtils.asMap("resource_type", resourceType));
       return new CloudinaryAsset(resource);
     } catch (NotFound nf) {
       LOG.info("Cloudinary asset " + externalId + " not found as resource type '" + resourceType + "'");
@@ -135,7 +136,7 @@ public class CloudinaryService {
       org.apache.http.HttpEntity ent = response.getEntity();
       int statusCode = response.getStatusLine().getStatusCode();
       if (statusCode > 200) {
-        String result = IOUtils.toString(ent.getContent(), "utf8");
+        String result = IOUtils.toString(ent.getContent(), StandardCharsets.UTF_8);
         LOG.error("Error getting Cloudinary resource: " + result);
       }
       else {
