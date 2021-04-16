@@ -1,7 +1,7 @@
 {
   "studioPlugins": [
     {
-      "mainClass": "com.coremedia.blueprint.studio.contenthub.cloudinary.ContentHubStudioCloudinaryPlugin",
+      "mainClass": "com.coremedia.labs.plugins.adapters.cloudinary.client.ContentHubStudioCloudinaryPlugin",
       "name": "Content Hub"
     }
   ]

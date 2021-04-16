@@ -1,8 +1,8 @@
-package com.coremedia.blueprint.contenthub.adapters.cloudinary;
+package com.coremedia.labs.plugins.adapters.cloudinary.server;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
-import com.coremedia.blueprint.contenthub.adapters.cloudinary.rest.CloudinaryAsset;
+import com.coremedia.labs.plugins.adapters.cloudinary.server.rest.CloudinaryAsset;
 import com.coremedia.contenthub.api.*;
 import com.coremedia.contenthub.api.exception.ContentHubException;
 import com.coremedia.contenthub.api.pagination.PaginationRequest;
@@ -17,23 +17,17 @@ import java.util.stream.Collectors;
 
 
 class CloudinaryContentHubAdapter implements ContentHubAdapter {
-  private static final Logger LOGGER = LoggerFactory.getLogger(CloudinaryContentHubAdapter.class);
-
   private final CloudinaryContentHubSettings settings;
   private final String connectionId;
 
-  private final String cloudName;
-  private final String apiKey;
-  private final String apiSecret;
-
-  private CloudinaryService cloudinaryService;
+  private final CloudinaryService cloudinaryService;
 
   CloudinaryContentHubAdapter(@NonNull CloudinaryContentHubSettings settings, @NonNull String connectionId) {
     this.settings = settings;
     this.connectionId = connectionId;
-    this.apiKey = settings.getApiKey();
-    this.cloudName = settings.getCloudName();
-    this.apiSecret = settings.getApiSecret();
+    String apiKey = settings.getApiKey();
+    String cloudName = settings.getCloudName();
+    String apiSecret = settings.getApiSecret();
 
 
     if (apiKey == null || apiSecret == null || cloudName == null) {
@@ -54,7 +48,7 @@ class CloudinaryContentHubAdapter implements ContentHubAdapter {
   public Folder getRootFolder(@NonNull ContentHubContext context) throws ContentHubException {
     String displayName = settings.getDisplayName();
     ContentHubObjectId rootId = new ContentHubObjectId(connectionId, connectionId);
-    return new CloudinaryFolder(cloudinaryService, context, rootId, displayName);
+    return new CloudinaryFolder(context, rootId, displayName);
   }
 
   @Nullable
@@ -114,7 +108,7 @@ class CloudinaryContentHubAdapter implements ContentHubAdapter {
             .stream()
             .map(item -> {
               ContentHubObjectId id = new ContentHubObjectId(connectionId, item.getPath());
-              return new CloudinaryFolder(cloudinaryService, context, id, item, null);
+              return new CloudinaryFolder(context, id, item, null);
             })
             .collect(Collectors.toList());
   }
@@ -124,7 +118,7 @@ class CloudinaryContentHubAdapter implements ContentHubAdapter {
             .stream()
             .map(item -> {
               ContentHubObjectId id = new ContentHubObjectId(connectionId, item.getPath());
-              return new CloudinaryFolder(cloudinaryService, context, id, item, parent);
+              return new CloudinaryFolder(context, id, item, parent);
             })
             .collect(Collectors.toList());
   }

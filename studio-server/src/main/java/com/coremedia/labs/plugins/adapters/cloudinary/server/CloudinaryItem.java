@@ -1,11 +1,15 @@
-package com.coremedia.blueprint.contenthub.adapters.cloudinary;
+package com.coremedia.labs.plugins.adapters.cloudinary.server;
 
 
-import com.coremedia.blueprint.contenthub.adapters.cloudinary.rest.CloudinaryAsset;
 import com.coremedia.common.util.WordAbbreviator;
-import com.coremedia.contenthub.api.*;
+import com.coremedia.contenthub.api.ContentHubBlob;
+import com.coremedia.contenthub.api.ContentHubContext;
+import com.coremedia.contenthub.api.ContentHubObjectId;
+import com.coremedia.contenthub.api.ContentHubType;
+import com.coremedia.contenthub.api.Item;
 import com.coremedia.contenthub.api.preview.DetailsElement;
 import com.coremedia.contenthub.api.preview.DetailsSection;
+import com.coremedia.labs.plugins.adapters.cloudinary.server.rest.CloudinaryAsset;
 import com.coremedia.mimetype.TikaMimeTypeService;
 import edu.umd.cs.findbugs.annotations.NonNull;
 import edu.umd.cs.findbugs.annotations.Nullable;
@@ -13,16 +17,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.util.*;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 class CloudinaryItem extends CloudinaryHubObject implements Item {
   private static final WordAbbreviator ABBREVIATOR = new WordAbbreviator();
-  private static final int BLOB_SIZE_LIMIT = 10000000;
-  private CloudinaryService service;
-  private CloudinaryAsset asset;
+  private final CloudinaryService service;
+  private final CloudinaryAsset asset;
 
   private TikaMimeTypeService tikaservice;
 
@@ -83,6 +87,10 @@ class CloudinaryItem extends CloudinaryHubObject implements Item {
       return "CMArticle";
   }
 
+  public String getFormat() {
+    return asset.getFormat();
+  }
+
   @NonNull
   @Override
   public List<DetailsSection> getDetails() {
@@ -120,12 +128,6 @@ class CloudinaryItem extends CloudinaryHubObject implements Item {
     return calendar;
   }
 
-
-
-  public long getSize() {
-    return asset.getSize();
-  }
-
   @Nullable
   public InputStream stream() {
     try {
@@ -136,29 +138,9 @@ class CloudinaryItem extends CloudinaryHubObject implements Item {
     return null;
   }
 
-  @Nullable
-  public Map<String, Object> getMetaData() {
-    Map<String, Object> data = new HashMap<>();
-
-    data.put("height", asset.getHeight());
-    data.put("width", asset.getWidth());
-    data.put("folder", asset.getFolder());
-    data.put("format", asset.getFormat());
-
-    return data;
-  }
-
   @NonNull
   public String getItemType() {
     return asset.getConnectorItemType();
-  }
-
-  public String getMimeType() {
-    return asset.getMimeType();
-  }
-
-  public boolean isDownloadable() {
-    return true;
   }
 
   @NonNull
@@ -176,15 +158,6 @@ class CloudinaryItem extends CloudinaryHubObject implements Item {
     return asset.getLastModificationDate();
   }
 
-  @Nullable
-  public String getManagementUrl() {
-    try {
-      String resourceType = asset.getResourceType();
-      return ASSET_BASE_URL + resourceType + "/upload/" + URLEncoder.encode(getId().getExternalId(), "utf8");
-    } catch (UnsupportedEncodingException e) {
-      return null;
-    }
-  }
 
   @Override
   public boolean equals(Object o) {
@@ -207,7 +180,4 @@ class CloudinaryItem extends CloudinaryHubObject implements Item {
     return asset;
   }
 
-  public CloudinaryService getService() {
-    return service;
-  }
 }

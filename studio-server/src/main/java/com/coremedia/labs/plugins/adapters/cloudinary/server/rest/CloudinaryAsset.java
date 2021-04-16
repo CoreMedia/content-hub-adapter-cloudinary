@@ -1,4 +1,4 @@
-package com.coremedia.blueprint.contenthub.adapters.cloudinary.rest;
+package com.coremedia.labs.plugins.adapters.cloudinary.server.rest;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -6,36 +6,23 @@ import java.util.Date;
 import java.util.Map;
 import java.util.Objects;
 
-/**
- * 0 = {java.util.HashMap$Node@22265} "bytes" -> "2298695"
- * 1 = {java.util.HashMap$Node@22266} "format" -> "jpg"
- * 2 = {java.util.HashMap$Node@22267} "resource_type" -> "image"
- * 3 = {java.util.HashMap$Node@22268} "width" -> "2815"
- * 4 = {java.util.HashMap$Node@22269} "secure_url" -> "https://res.cloudinary.com/coremedia/image/upload/v1526389142/CoreMedia/14965400A1A93C87.jpg"
- * 5 = {java.util.HashMap$Node@22270} "created_at" -> "2018-05-15T12:59:02Z"
- * 6 = {java.util.HashMap$Node@22271} "type" -> "upload"
- * 7 = {java.util.HashMap$Node@22272} "version" -> "1526389142"
- * 8 = {java.util.HashMap$Node@22273} "url" -> "http://res.cloudinary.com/coremedia/image/upload/v1526389142/CoreMedia/14965400A1A93C87.jpg"
- * 9 = {java.util.HashMap$Node@22274} "public_id" -> "CoreMedia/14965400A1A93C87"
- * 10 = {java.util.HashMap$Node@22275} "height" -> "1823"
- */
 public class CloudinaryAsset {
   private static final String DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss'Z'";
-  private String id;
-  private long size;
-  private String name;
-  private String type;
-  private String format;
-  private String resourceType;
-  private String url;
-  private String secureUrl;
+  private final String id;
+  private final long size;
+  private final String name;
+  private final String type;
+  private final String format;
+  private final String resourceType;
+  private final String url;
+  private final String secureUrl;
   private Date lastModificationDate;
   private int width;
   private int height;
   private String folder;
 
 
-  public CloudinaryAsset(Map data) {
+  public CloudinaryAsset(Map<String, Object> data) {
     this.id = (String) data.get("public_id");
     this.type = (String) data.get("type");
     this.url = (String) data.get("url");
@@ -120,7 +107,7 @@ public class CloudinaryAsset {
         folder = folder + "/";
       }
 
-      String idSegment = id.substring(folder.length(), id.length());
+      String idSegment = id.substring(folder.length());
       return !idSegment.contains("/");
     }
 
@@ -136,30 +123,6 @@ public class CloudinaryAsset {
       return "video";
     }
     return "default";
-  }
-
-  public String getMimeType() {
-    String resourceType = getResourceType();
-    //use mime type guessing instead
-    if(resourceType.equals("raw") && getName().contains(".")) {
-      return null;
-    }
-
-    String itemType = getConnectorItemType();
-    if("audio".equals(itemType)) {
-      resourceType = "audio";
-    }
-
-    //fix mime type
-    String format = getFormat();
-    if(format.equals("jpg")) {
-      format = "jpeg";
-    }
-    if(format.equals("pdf")) {
-      resourceType = "application";
-    }
-
-    return resourceType + "/" + format;
   }
 
   @Override
