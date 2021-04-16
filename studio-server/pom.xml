@@ -115,7 +115,7 @@
     <dependency>
       <groupId>org.apache.httpcomponents</groupId>
       <artifactId>httpclient</artifactId>
-      <version>4.4</version>
+      <version>4.5.13</version>
     </dependency>
 
     <dependency>
@@ -127,7 +127,7 @@
     <dependency>
       <groupId>org.apache.httpcomponents</groupId>
       <artifactId>httpcore</artifactId>
-      <version>4.4</version>
+      <version>4.4.13</version>
     </dependency>
 
   </dependencies>
@@ -146,19 +146,22 @@
         <version>3.1.2</version>
         <executions>
           <execution>
-            <id>studio-server.content-hub-adapter-filesystem:maven-dependency-plugin:analyze-duplicate</id>
+            <id>studio-server.content-hub-adapter-cloudinary:maven-dependency-plugin:analyze-duplicate</id>
             <goals>
               <goal>analyze-duplicate</goal>
             </goals>
           </execution>
           <execution>
-            <id>studio-server.content-hub-adapter-filesystem:maven-dependency-plugin:analyze-only</id>
+            <id>studio-server.content-hub-adapter-cloudinary:maven-dependency-plugin:analyze-only</id>
             <goals>
               <goal>analyze-only</goal>
             </goals>
             <configuration>
               <failOnWarning>true</failOnWarning>
-              <ignoreNonCompile>true</ignoreNonCompile>
+              <ignoreNonCompile>false</ignoreNonCompile>
+              <ignoredUnusedDeclaredDependencies>
+                <ignoredUnusedDeclaredDependency>com.cloudinary:cloudinary-http44</ignoredUnusedDeclaredDependency>
+              </ignoredUnusedDeclaredDependencies>
             </configuration>
           </execution>
         </executions>

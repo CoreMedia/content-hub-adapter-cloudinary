@@ -13,18 +13,14 @@
 
 ## Documentation Update
 
-* Ensure you have built the CMCC version (snapshot versions) which this
-    workspace dedicates to. Otherwise, the third-party versions won't
-    match the declared CMCC version (most third-party dependencies)
-    are managed in Blueprint and CMCC Core.
-
-* Update [THIRD-PARTY.txt](../THIRD-PARTY.txt) and license downloads either manually or by running if you are using Maven and Java:
+* Update [THIRD-PARTY.txt](../THIRD-PARTY.txt) and license downloads either
+ manually or by running if you are using Maven and Java:
 
     ```bash
     $ mvn -Pdocs-third-party generate-resources
     ```
   
-  Your extensions root POM has to contain the following configuration to make this work:
+  Your plugin root POM has to contain the following configuration to make this work:
   
   ```xml
     <build>
@@ -82,9 +78,13 @@
     
 * Describe the changes since the last release in `CHANGELOG.md`.
 
-* If this is the first release of the adapter for a new CMCC AEP release, create a new branch from master whose name matches the release version pattern, e.g. `cmcc-10-2010`.
+* If this release is not compatible with older CMCC versions, create a new
+maintenance branch for those versions.  Branch from the state of the last release,
+and name the branch after the oldest compatible CMCC version, e.g. `cmcc-10-2010`.
 
-* Once you switched to the branch and the state that is to be released, use GitHub's release functionality to create the tag and the release. And, don't forget to add some details about the latest and greatest changes.
+* Once the state that is to be released, use GitHub's release functionality to
+create the tag and the release. And, don't forget to add some details about the
+latest and greatest changes.
 
 ## Post Process
 

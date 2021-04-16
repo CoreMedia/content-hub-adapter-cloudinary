@@ -1,4 +1,4 @@
-# The content-hub-adapter-navigation Extension Manual
+# The content-hub-adapter-navigation Plugin Manual
 
 ## Table of Contents
 
@@ -8,7 +8,7 @@
 
 1. [Installation](installation.md)
 
-    How to administrate the content-hub-adapter-cloudinary extension (especially in CoreMedia Studio).
+    How to administrate the content-hub-adapter-cloudinary plugin (especially in CoreMedia Studio).
 
 1. [Contribute](contribute.md)
 
