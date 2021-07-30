@@ -1,6 +1,7 @@
 package com.coremedia.labs.plugins.adapters.cloudinary.server;
 
 import com.cloudinary.Cloudinary;
+import com.cloudinary.Transformation;
 import com.cloudinary.api.exceptions.NotFound;
 import com.cloudinary.api.exceptions.RateLimited;
 import com.cloudinary.utils.ObjectUtils;
@@ -146,6 +147,18 @@ public class CloudinaryService {
       LOG.error("Couldn't connect to resource " + url + ": " + e.getMessage(), e);
     }
     return null;
+  }
+
+  /**
+   * Get the thumbnail url for the given asset.
+   *
+   * @param asset Cloudinary asset
+   * @return the thumbnail url
+   */
+  public String getThumbnailUrl(CloudinaryAsset asset) {
+    return cloudinary.url()
+            .transformation(new Transformation().width(400))
+            .generate(asset.getId());
   }
 
 }
