@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.0
+
+* Initial release of the plugin for CMCC 11.2110.1 including all features known from latest version of CMCCv10.
+
 ## 1.0.2
 * Compatibility for CoreMedia Content Cloud release 2107.1
 * Added Mime-Type and Content Type mappings

@@ -9,10 +9,11 @@
 ## Table of Content
 
 1. [Introduction](#introduction)
-1. [Use Git](#use-git)
-2. [Download Release](#download-release)
-3. [Activate the Plugin](#activate-the-plugin)
-4. [Intellij IDEA Hints](#intellij-idea-hints)
+2. [Use Git](#use-git)
+3. [Download Release](#download-release)
+4. [Activate the Plugin](#activate-the-plugin)
+5. [Configure the Plugin](#configure-the-plugin)
+6. [Intellij IDEA Hints](#intellij-idea-hints)
 
 ## Introduction
 
@@ -20,11 +21,11 @@ Depending on your setup and your plans, you can integrate this project in differ
 
 * If you want to use the plugin in your project, clone or fork the repository.
 * If you do not want to use GitHub, proceed as described in [Download Release](#download-release).
-* If you want to contribute a new feature or a bugfix, as an external developer, you need a fork of the repository to create a Pull Request. 
+* If you want to contribute a new feature or a bugfix, as an external developer, you need a fork of the repository to create a Pull Request.
 
-## Use Git 
+## Use Git
 
-Clone this repository or your fork. Make sure to use the suitable branch 
+Clone this repository or your fork. Make sure to use the suitable branch
 for your workspace version (see [README](../README.md)). A fork is required if
 you plan to customize the plugin.
 
@@ -52,6 +53,12 @@ into that directory.
 
 Now the plugin is running.  You won't yet notice it though, until you configure a connection 
 and restart the studio server.  
+
+## Configure the Plugin
+
+Once having activated the plugin as described above, you can establish the connection to the external system by adding a Settings content to the site, globally, or the user's home folder. The general Content Hub configuration is described in the [Studio Developer Manual](https://documentation.coremedia.com/cmcc-10/artifacts/2107/webhelp/studio-developer-en/content/Content_HubAdapterConfiguration.html). Additional adapter-specific configuration is shown in the screenshot below:
+
+![Image1: Adapter-specific configuration](images/editorial/editorial-documentation_2.png)
 
 ## Intellij IDEA Hints
 
