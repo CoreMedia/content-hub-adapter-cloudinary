@@ -76,8 +76,13 @@ class CloudinaryItem extends BaseFileSystemItem implements Item {
                 ).stream().filter(p -> Objects.nonNull(p.getValue())).collect(Collectors.toUnmodifiableList())));
     }
 
+  @Nullable
+  @Override
+  public ContentHubBlob getThumbnailBlob() {
+    return getBlob(ContentHubBlob.THUMBNAIL_BLOB_CLASSIFIER);
+  }
 
-    @Nullable
+  @Nullable
     @Override
     public ContentHubBlob getBlob(String classifier) {
         ContentHubBlob blob = null;
