@@ -82,7 +82,7 @@ class CloudinaryContentHubAdapter implements ContentHubAdapter {
 
         if (realFolder.getCategory() == null) {
             children.addAll(getRootFolders(context));
-            children.addAll(getChildItems("/", context));
+            children.addAll(getChildItems("", context));
         } else {
             children.addAll(getSubFolders(realFolder, context));
             children.addAll(getChildItems(realFolder.getCategory().getPath(), context));
