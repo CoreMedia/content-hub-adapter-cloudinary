@@ -6,10 +6,9 @@
   <groupId>com.coremedia.labs.plugins</groupId>
   <artifactId>studio-server.content-hub-adapter-cloudinary</artifactId>
   <version>2.0.3-SNAPSHOT</version>
-  <!--<packaging>coremedia-plugin</packaging>-->
+  <packaging>coremedia-plugin</packaging>
 
   <properties>
-    <coremedia.project.extension.for>studio-lib</coremedia.project.extension.for>
     <maven.compiler.release>11</maven.compiler.release>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
