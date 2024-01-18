@@ -4,7 +4,7 @@ Please read the versioning section of the project to see what other CoreMedia ve
 "The status badge describes if the project is maintained. Possible values are active and inactive. 
 If a project is inactive it means that the development has been discontinued and won't support future CoreMedia versions."
 )
-![Cloudinary API Used](https://img.shields.io/static/v1?message=v1.26.0&label=Cloudinary&20API&style=for-the-badge&labelColor=6FC3B8&color=006CAE "CoreMedia Labs projects may depend on third party systems or APIs. This badge type shows the version number that is required for the selected project version.")
+![Cloudinary API Used](https://img.shields.io/static/v1?message=v1.37.0&label=Cloudinary&20API&style=for-the-badge&labelColor=6FC3B8&color=006CAE "CoreMedia Labs projects may depend on third party systems or APIs. This badge type shows the version number that is required for the selected project version.")
 
 # Content Hub Adapter for Cloudinary
 

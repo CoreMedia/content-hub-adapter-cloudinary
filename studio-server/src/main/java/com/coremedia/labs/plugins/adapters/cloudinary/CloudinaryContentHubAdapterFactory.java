@@ -13,26 +13,26 @@ import java.util.Map;
  */
 class CloudinaryContentHubAdapterFactory implements ContentHubAdapterFactory<CloudinaryContentHubSettings> {
 
-    ContentHubMimeTypeService mimeTypeService;
-    private final Map<ContentHubType, String> typeMapping;
+  ContentHubMimeTypeService mimeTypeService;
+  private final Map<ContentHubType, String> typeMapping;
 
-    public CloudinaryContentHubAdapterFactory(ContentHubMimeTypeService mimeTypeService,
-                                              Map<ContentHubType, String> typeMapping) {
-        this.mimeTypeService = mimeTypeService;
-        this.typeMapping = typeMapping;
-    }
+  public CloudinaryContentHubAdapterFactory(ContentHubMimeTypeService mimeTypeService,
+                                            Map<ContentHubType, String> typeMapping) {
+    this.mimeTypeService = mimeTypeService;
+    this.typeMapping = typeMapping;
+  }
 
-    @Override
-    @NonNull
-    public String getId() {
-        return "cloudinary";
-    }
+  @Override
+  @NonNull
+  public String getId() {
+    return "cloudinary";
+  }
 
-    @NonNull
-    @Override
-    public ContentHubAdapter createAdapter(@NonNull CloudinaryContentHubSettings settings,
-                                           @NonNull String connectionId) {
-        return new CloudinaryContentHubAdapter(settings, connectionId, mimeTypeService, typeMapping);
-    }
+  @NonNull
+  @Override
+  public ContentHubAdapter createAdapter(@NonNull CloudinaryContentHubSettings settings,
+                                         @NonNull String connectionId) {
+    return new CloudinaryContentHubAdapter(settings, connectionId, mimeTypeService, typeMapping);
+  }
 
 }

@@ -1,8 +1,7 @@
 package com.coremedia.labs.plugins.adapters.cloudinary;
 
-
 /**
- * Interface that marks the settings that are needed for a connection to CLoudinary
+ * Interface that marks the settings for the configuration of the CloudinaryAdapter.
  */
 interface CloudinaryContentHubSettings {
 
@@ -28,4 +27,12 @@ interface CloudinaryContentHubSettings {
    */
   String getApiSecret();
 
+  /**
+   * Returns the API endpoint to use, e.g. https://api-eu.cloudinary.com, defaults to
+   *
+   * @return uploadPrefix.
+   */
+  String getUploadPrefix();
+
+  Boolean isAdapterAssetIdModeEnabled();
 }

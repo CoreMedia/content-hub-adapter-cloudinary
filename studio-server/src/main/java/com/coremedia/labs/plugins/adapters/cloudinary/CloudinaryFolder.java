@@ -1,31 +1,29 @@
 package com.coremedia.labs.plugins.adapters.cloudinary;
 
-
-import com.coremedia.labs.plugins.adapters.cloudinary.rest.CloudinaryCategory;
-import com.coremedia.contenthub.api.ContentHubContext;
 import com.coremedia.contenthub.api.ContentHubObjectId;
 import com.coremedia.contenthub.api.ContentHubType;
 import com.coremedia.contenthub.api.Folder;
+import com.coremedia.labs.plugins.adapters.cloudinary.rest.CloudinaryCategory;
 import edu.umd.cs.findbugs.annotations.NonNull;
-import edu.umd.cs.findbugs.annotations.Nullable;
-
-import java.util.*;
 
 class CloudinaryFolder extends CloudinaryHubObject implements Folder {
-
+  private final String name;
   private CloudinaryCategory category;
-  private String name;
   private CloudinaryFolder parent;
-  private List<CloudinaryItem> childItems = new ArrayList<>();
 
-  CloudinaryFolder(ContentHubContext context, ContentHubObjectId id, String name) {
-    super(id, context);
+  // only to be used for artificial root folder
+  CloudinaryFolder(@NonNull ContentHubObjectId id, @NonNull String name) {
+    super(id);
     this.name = name;
   }
 
-  CloudinaryFolder(ContentHubContext context, ContentHubObjectId id, CloudinaryCategory category, @Nullable CloudinaryFolder parent) {
-    super(id, context);
+  CloudinaryFolder(@NonNull ContentHubObjectId id, @NonNull CloudinaryCategory category) {
+    this(id, category.getName());
     this.category = category;
+  }
+
+  CloudinaryFolder(@NonNull ContentHubObjectId id, @NonNull CloudinaryCategory category, @NonNull CloudinaryFolder parent) {
+    this(id, category);
     this.parent = parent;
   }
 
@@ -40,23 +38,9 @@ class CloudinaryFolder extends CloudinaryHubObject implements Folder {
   }
 
   @NonNull
-  public List<CloudinaryItem> getItems() {
-    return childItems;
-  }
-
-
-  @NonNull
   @Override
   public String getName() {
-    if (name != null) {
-      return name;
-    }
-    return category.getName();
-  }
-
-  @Nullable
-  public CloudinaryFolder getParent() {
-    return parent;
+    return name;
   }
 
   @NonNull
@@ -65,7 +49,30 @@ class CloudinaryFolder extends CloudinaryHubObject implements Folder {
     return getName();
   }
 
-  public void setChildItems(List<CloudinaryItem> childItems) {
-    this.childItems = childItems;
+  public CloudinaryFolder getParent() {
+    if (parent != null) {
+      return parent;
+    }
+    if (category == null) {
+      return null;
+    }
+    // construct parent from category path
+    String connectionId = getId().getConnectionId();
+    parent = getParentFromPath(category.getPath(), connectionId);
+    return parent;
   }
+
+  private CloudinaryFolder getParentFromPath(@NonNull String path, @NonNull String connectionId) {
+    int lastPathDelimiter = path.lastIndexOf('/');
+    // handle folders in root folder
+    if (lastPathDelimiter == -1)
+      return null;
+    String parentPath = path.substring(0, lastPathDelimiter);
+    lastPathDelimiter = parentPath.lastIndexOf('/');
+    String parentName = (lastPathDelimiter == -1) ? parentPath : parentPath.substring(lastPathDelimiter + 1);
+    ContentHubObjectId parentId = new ContentHubObjectId(connectionId, parentPath);
+    CloudinaryCategory parentCloudinaryCategory = new CloudinaryCategory(parentName, parentPath);
+    return new CloudinaryFolder(parentId, parentCloudinaryCategory);
+  }
+
 }

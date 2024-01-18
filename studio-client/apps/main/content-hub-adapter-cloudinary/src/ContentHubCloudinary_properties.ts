@@ -22,6 +22,7 @@ interface ContentHubCloudinary_properties {
 
   metadata_sectionName: string;
   text_sectionItemKey: string;
+  size_sectionItemKey: string;
   author_sectionItemKey: string;
   published_sectionItemKey: string;
   lastModified_sectionItemKey: string;
@@ -45,6 +46,7 @@ const ContentHubCloudinary_properties: ContentHubCloudinary_properties = {
 
   metadata_sectionName: "Metadata",
   text_sectionItemKey: "Text",
+  size_sectionItemKey: "Size",
   author_sectionItemKey: "Author",
   published_sectionItemKey: "Published",
   lastModified_sectionItemKey: "Last modified",

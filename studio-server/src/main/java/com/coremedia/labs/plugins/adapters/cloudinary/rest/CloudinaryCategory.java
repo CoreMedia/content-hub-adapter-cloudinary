@@ -1,6 +1,7 @@
 package com.coremedia.labs.plugins.adapters.cloudinary.rest;
 
-import java.util.Date;
+import edu.umd.cs.findbugs.annotations.NonNull;
+
 import java.util.Map;
 
 /**
@@ -10,17 +11,17 @@ public class CloudinaryCategory {
   private final String name;
   private final String path;
 
-  public CloudinaryCategory(Map<String, Object> folderData) {
-    this.name = (String) folderData.get("name");
-    this.path = (String) folderData.get("path");
+  public CloudinaryCategory(@NonNull String name, @NonNull String path) {
+    this.name = name;
+    this.path = path;
+  }
+
+  public CloudinaryCategory(@NonNull Map<String, Object> folderData) {
+    this((String) folderData.get("name"), (String) folderData.get("path"));
   }
 
   public String getName() {
     return name;
-  }
-
-  public Date getLastModified() {
-    return null;
   }
 
   public String getPath() {

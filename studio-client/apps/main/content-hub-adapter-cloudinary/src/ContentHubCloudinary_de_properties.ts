@@ -11,6 +11,7 @@ ResourceBundleUtil.override(ContentHubCloudinary_properties, {
 
   metadata_sectionName: "Metadaten",
   text_sectionItemKey: "Text",
+  size_sectionItemKey: "Größe",
   author_sectionItemKey: "Autor",
   published_sectionItemKey: "Publiziert",
   lastModified_sectionItemKey: "Zuletzt bearbeitet",

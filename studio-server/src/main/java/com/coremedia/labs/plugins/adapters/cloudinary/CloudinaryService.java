@@ -1,13 +1,17 @@
 package com.coremedia.labs.plugins.adapters.cloudinary;
 
 import com.cloudinary.Cloudinary;
+import com.cloudinary.Search;
 import com.cloudinary.Transformation;
+import com.cloudinary.api.ApiResponse;
 import com.cloudinary.api.exceptions.NotFound;
 import com.cloudinary.api.exceptions.RateLimited;
 import com.cloudinary.utils.ObjectUtils;
 import com.coremedia.contenthub.api.exception.ContentHubException;
 import com.coremedia.labs.plugins.adapters.cloudinary.rest.CloudinaryAsset;
 import com.coremedia.labs.plugins.adapters.cloudinary.rest.CloudinaryCategory;
+import edu.umd.cs.findbugs.annotations.NonNull;
+import edu.umd.cs.findbugs.annotations.Nullable;
 import org.apache.commons.io.IOUtils;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -26,17 +30,20 @@ import java.util.Map;
 
 
 public class CloudinaryService {
-
   private static final Logger LOG = LoggerFactory.getLogger(CloudinaryService.class);
   private final Cloudinary cloudinary;
+  private final boolean assetIdModeEnabled;
 
-  public CloudinaryService(Cloudinary cloudinary) {
+  public CloudinaryService(Cloudinary cloudinary, boolean assetIdModeEnabled) {
     this.cloudinary = cloudinary;
+    this.assetIdModeEnabled = assetIdModeEnabled;
   }
 
   public List<CloudinaryCategory> getRootFolders() {
     List<CloudinaryCategory> result = new ArrayList<>();
     try {
+      if(LOG.isDebugEnabled())
+        LOG.debug("Getting Cloudinary root folders");
       List<Map<String, Object>> folders = (List<Map<String, Object>>) cloudinary.api().rootFolders(getDefaultOptions()).get("folders");
       for (Map<String, Object> folder : folders) {
         result.add(new CloudinaryCategory(folder));
@@ -50,6 +57,8 @@ public class CloudinaryService {
   public List<CloudinaryCategory> getSubFolders(String path) {
     List<CloudinaryCategory> result = new ArrayList<>();
     try {
+      if(LOG.isDebugEnabled())
+        LOG.debug("Getting Cloudinary subfolders with path='{}'", path);
       List<Map<String, Object>> folders = (List<Map<String, Object>>) cloudinary.api().subFolders(path, getDefaultOptions()).get("folders");
       for (Map<String, Object> folder : folders) {
         result.add(new CloudinaryCategory(folder));
@@ -60,35 +69,37 @@ public class CloudinaryService {
     return result;
   }
 
-  public List<CloudinaryAsset> getAssets  (String path, boolean filter) {
-    List<CloudinaryAsset> result = new ArrayList<>();
+  public Search search() {
+    return cloudinary.search();
+  }
+
+  public CloudinaryAssetsPage getAssets(@NonNull String path, boolean filter, @Nullable String pageCursor) {
+    CloudinaryAssetsPage result = new CloudinaryAssetsPage();
     try {
-      List<Map<String, Object>> collectedItems = new ArrayList<>();
-      List<Map<String, Object>> items = (List<Map<String, Object>>) cloudinary.api().resources(ObjectUtils.asMap("type", "upload", "prefix", path, "resource_type", "image")).get("resources");
-      collectedItems.addAll(items);
-      items = (List<Map<String, Object>>) cloudinary.api().resources(ObjectUtils.asMap("type", "upload", "prefix", path, "resource_type", "raw")).get("resources");
-      collectedItems.addAll(items);
-      items = (List<Map<String, Object>>) cloudinary.api().resources(ObjectUtils.asMap("type", "upload", "prefix", path, "resource_type", "video")).get("resources");
-      collectedItems.addAll(items);
-
-      for (Map collectedItem : collectedItems) {
-        CloudinaryAsset asset = new CloudinaryAsset(collectedItem);
-
-        //filter for direct children
-        if(filter) {
-          if (asset.isInFolder(path)) {
-            result.add(asset);
-          }
-        }
-        else {
-          result.add(asset);
-        }
+      if(LOG.isDebugEnabled())
+        LOG.debug("Getting Cloudinary assets with path='{}' and cursor='{}'", path, pageCursor);
+      List<Map<String, Object>> collectedItems;
+      String query = "(resource_type:image OR resource_type:video OR resource_type:raw) AND folder=\"" + path + "\"";
+      Search search = cloudinary.search().expression(query);
+      search.sortBy("filename", "asc");
+      if (pageCursor != null) {
+        search.nextCursor(pageCursor);
       }
-    }
-    catch (RateLimited rle) {
+
+      ApiResponse response = search.execute();
+      result.setNextPageCursor((String) response.get("next_cursor"));
+      result.setTotalCount((Integer) response.get("total_count"));
+      collectedItems = (List<Map<String, Object>>) response.get("resources");
+
+      for (Map<String, Object> collectedItem : collectedItems) {
+        CloudinaryAsset asset = createCloudinaryAsset(collectedItem);
+        //  filter for direct children
+        if (!filter || asset.isInFolder(path))
+          result.add(asset);
+      }
+    } catch (RateLimited rle) {
       throw new ContentHubException(rle);
-    }
-    catch (Exception e) {
+    } catch (Exception e) {
       LOG.error("Error loading Cloudinary assets: " + e.getMessage(), e);
     }
     return result;
@@ -99,11 +110,10 @@ public class CloudinaryService {
     if (asset == null) {
       asset = getAsset(externalId, "video");
     }
-
     if (asset == null) {
       asset = getAsset(externalId, "raw");
     }
-
+    LOG.warn("Cloudinary asset " + externalId + " not found");
     return asset;
   }
 
@@ -116,11 +126,13 @@ public class CloudinaryService {
 
   private CloudinaryAsset getAsset(String externalId, String resourceType) {
     try {
+      if(LOG.isDebugEnabled())
+        LOG.debug("Getting Cloudinary asset with externalId='{}' and resourceType='{}'", externalId, resourceType);
       String id = URLEncoder.encode(externalId, StandardCharsets.UTF_8);
       Map<String, Object> resource = cloudinary.api().resource(id, ObjectUtils.asMap("resource_type", resourceType));
-      return new CloudinaryAsset(resource);
+      return createCloudinaryAsset(resource);
     } catch (NotFound nf) {
-      LOG.info("Cloudinary asset " + externalId + " not found as resource type '" + resourceType + "'");
+      LOG.debug("Cloudinary asset " + externalId + " not found as resource type '" + resourceType + "'");
       return null;
     } catch (Exception e) {
       LOG.error("Error loading Cloudinary asset: " + e.getMessage(), e);
@@ -139,8 +151,7 @@ public class CloudinaryService {
       if (statusCode > 200) {
         String result = IOUtils.toString(ent.getContent(), StandardCharsets.UTF_8);
         LOG.error("Error getting Cloudinary resource: " + result);
-      }
-      else {
+      } else {
         return ent.getContent();
       }
     } catch (Exception e) {
@@ -156,9 +167,17 @@ public class CloudinaryService {
    * @return the thumbnail url
    */
   public String getThumbnailUrl(CloudinaryAsset asset) {
-    return cloudinary.url()
+    String thumbnailUrl = cloudinary.url()
+            .resourceType(asset.getResourceType())
             .transformation(new Transformation().width(400))
-            .generate(asset.getId());
+            .generate(asset.getPublicId());
+    if ("video".equals(asset.getResourceType())) {
+      thumbnailUrl = thumbnailUrl + ".jpg";
+    }
+    return thumbnailUrl;
   }
 
+  public CloudinaryAsset createCloudinaryAsset(Map<String, Object> resource) {
+    return new CloudinaryAsset(resource, assetIdModeEnabled);
+  }
 }
