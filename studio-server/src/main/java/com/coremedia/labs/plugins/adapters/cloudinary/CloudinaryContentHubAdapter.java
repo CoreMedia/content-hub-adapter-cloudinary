@@ -6,16 +6,24 @@ import com.coremedia.contenthub.api.*;
 import com.coremedia.contenthub.api.exception.ContentHubException;
 import com.coremedia.contenthub.api.pagination.PaginationRequest;
 import com.coremedia.contenthub.api.pagination.PaginationResponse;
+import com.coremedia.contenthub.api.search.ContentHubSearchService;
 import com.coremedia.labs.plugins.adapters.cloudinary.rest.CloudinaryAsset;
 import com.coremedia.labs.plugins.adapters.cloudinary.rest.CloudinaryCategory;
 import edu.umd.cs.findbugs.annotations.NonNull;
 import edu.umd.cs.findbugs.annotations.Nullable;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 class CloudinaryContentHubAdapter implements ContentHubAdapter {
+  private static final Logger LOG = LoggerFactory.getLogger(CloudinaryContentHubTransformer.class);
   private final CloudinaryContentHubSettings settings;
+  private final CloudinaryImportOptions importOptions;
   private final String connectionId;
   private final CloudinaryService cloudinaryService;
   private final ContentHubMimeTypeService mimeTypeService;
@@ -34,8 +42,9 @@ class CloudinaryContentHubAdapter implements ContentHubAdapter {
     String cloudName = settings.getCloudName();
     String apiSecret = settings.getApiSecret();
     String uploadPrefix = settings.getUploadPrefix();
-    // wip/not tested -> don't enable
-    boolean assetIdModeEnabled = false;
+    // parse import options configuration
+    importOptions = new CloudinaryImportOptions(settings);
+    LOG.info("Starting CloudinaryContentHubAdapter with " + importOptions);
 
     if (apiKey == null || apiSecret == null || cloudName == null) {
       throw new ContentHubException("Invalid configuration for connector 'Cloudinary', ensure that apiKey, apiSecret and cloudName is set.");
@@ -47,7 +56,7 @@ class CloudinaryContentHubAdapter implements ContentHubAdapter {
             "api_secret", apiSecret);
     if (uploadPrefix != null)
       cloudinaryConfig.put("upload_prefix", uploadPrefix);
-    this.cloudinaryService = new CloudinaryService(new Cloudinary(cloudinaryConfig), assetIdModeEnabled);
+    this.cloudinaryService = new CloudinaryService(new Cloudinary(cloudinaryConfig), importOptions);
   }
 
   @NonNull
@@ -153,7 +162,7 @@ class CloudinaryContentHubAdapter implements ContentHubAdapter {
   @Override
   @NonNull
   public ContentHubTransformer transformer() {
-    return new CloudinaryContentHubTransformer();
+    return new CloudinaryContentHubTransformer(importOptions);
   }
 
 
@@ -189,6 +198,12 @@ class CloudinaryContentHubAdapter implements ContentHubAdapter {
             .collect(Collectors.toList());
     PaginationResponse response = new PaginationResponse(assetsPage.getNextPageCursor() != null, assetsPage.getTotalCount(), assetsPage.getNextPageCursor());
     return new GetChildrenResult(assetsList, response);
+  }
+
+  @Override
+  public Optional<ContentHubSearchService> searchService() {
+    return Optional.of(new CloudinarySearchService(cloudinaryService, connectionId,
+            mimeTypeService, itemTypeToContentTypeMapping));
   }
 
 }

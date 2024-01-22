@@ -2,6 +2,18 @@
 
 ## 2.0.3
 * Improved browse mode with pagination support
+* Rudimentary support for search (on filename)
+* Import options
+  * Options for using asset_id as externalRefId (experimental)  
+    * assetIdModeEnabled (String: true/false, default false)
+    * importPublicIdAs (String: name of property, default null)
+  * Options to control video import behaviour
+    * importVideoBlob (String: true/false, default true)
+    * importVideoURL (String: true/false, default false)
+  * Options to control image import behaviour 
+    * importImageMaxWidth (Integer, default null)
+    * importImageQuality (Integer, 1-100, default null)
+* Experimental support for using asset_id as externalRefId
 * Other enhancements and bugfixes 
   * Thumbnail preview for Videos
   * Display asset size in preview 

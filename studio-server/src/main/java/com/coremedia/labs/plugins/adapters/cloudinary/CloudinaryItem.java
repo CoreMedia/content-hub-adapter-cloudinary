@@ -116,9 +116,9 @@ class CloudinaryItem extends BaseFileSystemItem implements Item {
   }
 
   @Nullable
-  public InputStream stream() {
+  public InputStream stream(boolean forImport) {
     try {
-      return service.stream(asset);
+      return service.stream(asset, forImport);
     } catch (Exception e) {
       LOG.error("Failed to open resource input stream for " + asset.getName() + "/" + asset.getId() + ": " + e.getMessage(), e);
     }
