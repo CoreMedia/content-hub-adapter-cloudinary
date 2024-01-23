@@ -22,18 +22,17 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.InputStream;
-import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 public class CloudinaryService {
   private static final Logger LOG = LoggerFactory.getLogger(CloudinaryService.class);
   private final Cloudinary cloudinary;
-  private final CloudinaryImportOptions importOptions;
+  private final CloudinaryOptions cloudinaryOptions;
 
-  public CloudinaryService(Cloudinary cloudinary, CloudinaryImportOptions importOptions) {
+  public CloudinaryService(Cloudinary cloudinary, CloudinaryOptions cloudinaryOptions) {
     this.cloudinary = cloudinary;
-    this.importOptions = importOptions;
+    this.cloudinaryOptions = cloudinaryOptions;
   }
 
   public List<CloudinaryCategory> getRootFolders() {
@@ -103,8 +102,8 @@ public class CloudinaryService {
   }
 
   public CloudinaryAsset getAsset(String externalId) {
-    CloudinaryAsset asset = null;
-    if (importOptions.isAssetIdModeEnabled()) {
+    CloudinaryAsset asset;
+    if (cloudinaryOptions.isAssetIdModeEnabled()) {
       asset = getAssetByAssetId(externalId);
     } else {
       asset = getAssetByPublicId(externalId, "image");
@@ -178,23 +177,23 @@ public class CloudinaryService {
   private String getImportUrl(CloudinaryAsset asset) {
     if (!"image".equals(asset.getResourceType()))
       return asset.getUrl();
-    boolean transform = false;
+    boolean transformed = false;
     Transformation transformation = new Transformation();
-    // set image quality if configured
-    if (importOptions.getImportImageQuality() != null) {
-      int imageQuality = importOptions.getImportImageQuality();
-      transformation = transformation.quality(imageQuality);
-      transform = true;
-    }
     // scale image to maxWidth if configured
-    if (importOptions.getImportImageMaxWidth() != null) {
-      int maxWidth = importOptions.getImportImageMaxWidth();
+    if (cloudinaryOptions.getImportImageMaxWidth() != null) {
+      int maxWidth = cloudinaryOptions.getImportImageMaxWidth();
       if (asset.getWidth() > maxWidth) {
         transformation = transformation.width(maxWidth);
-        transform = true;
+        transformed = true;
       }
     }
-    if (!transform)
+    // set image quality if configured (and if not transformed for maxWidth
+    if (!transformed && cloudinaryOptions.getImportImageQuality() != null) {
+      int imageQuality = cloudinaryOptions.getImportImageQuality();
+      transformation = transformation.quality(imageQuality);
+      transformed = true;
+    }
+    if (!transformed)
       return asset.getUrl();
     // keep metadata despite transformation
     transformation = transformation.flags("keep_iptc", "keep_attribution");
@@ -220,6 +219,6 @@ public class CloudinaryService {
   }
 
   public CloudinaryAsset createCloudinaryAsset(Map<String, Object> resource) {
-    return new CloudinaryAsset(resource, importOptions.isAssetIdModeEnabled());
+    return new CloudinaryAsset(resource, cloudinaryOptions.isAssetIdModeEnabled());
   }
 }

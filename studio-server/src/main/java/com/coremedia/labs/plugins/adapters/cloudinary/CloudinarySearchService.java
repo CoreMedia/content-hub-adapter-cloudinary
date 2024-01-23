@@ -14,20 +14,22 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class CloudinarySearchService implements ContentHubSearchService {
+  private static final Logger LOGGER = LoggerFactory.getLogger(CloudinarySearchService.class);
+
   private static final Logger LOG = LoggerFactory.getLogger(CloudinarySearchService.class);
   private final CloudinaryService cloudinaryService;
+  private final CloudinaryOptions cloudinaryOptions;
   private final String connectionId;
   private final ContentHubMimeTypeService mimeTypeService;
   private final Map<ContentHubType, String> itemTypeToContentTypeMapping;
 
-  private static final String QUERY_STRING = "public_id:%s || tags:%s";
-
-  private static final Logger LOGGER = LoggerFactory.getLogger(CloudinarySearchService.class);
-
-  public CloudinarySearchService(CloudinaryService cloudinaryService, String connectionId,
+  public CloudinarySearchService(CloudinaryService cloudinaryService,
+                                 CloudinaryOptions cloudinaryOptions,
+                                 String connectionId,
                                  ContentHubMimeTypeService mimeTypeService,
                                  Map<ContentHubType, String> itemTypeToContentTypeMapping) {
     this.cloudinaryService = cloudinaryService;
+    this.cloudinaryOptions = cloudinaryOptions;
     this.connectionId = connectionId;
     this.mimeTypeService = mimeTypeService;
     this.itemTypeToContentTypeMapping = itemTypeToContentTypeMapping;
@@ -37,15 +39,15 @@ public class CloudinarySearchService implements ContentHubSearchService {
   public ContentHubSearchResult search(String query, @Nullable Folder belowFolder, @Nullable ContentHubType type,
                                        Collection<String> filterQueries,
                                        List<Sort> sortCriteria, int limit) {
-    if(query.isEmpty()) {
+    if (query.isEmpty()) {
       return new ContentHubSearchResult(Collections.emptyList());
     }
     Search search = cloudinaryService.search();
     try {
-      // TODO: search expression/fields
-      if(LOG.isDebugEnabled())
-        LOG.debug("Searching Cloudinary assets with query='{}'", query);
-      search.expression("filename=" + query);
+      String searchExpression = String.format(cloudinaryOptions.getSearchQuery(), query);
+      if (LOG.isDebugEnabled())
+        LOG.debug("Searching Cloudinary assets with expression='{}'", searchExpression);
+      search.expression(searchExpression);
       ApiResponse response = search.execute();
       if (!response.containsKey("resources")) {
         return new ContentHubSearchResult(Collections.emptyList());
@@ -76,7 +78,7 @@ public class CloudinarySearchService implements ContentHubSearchService {
 
   @Override
   public boolean supportsSearchBelowFolder() {
-    return true;
+    return false;
   }
 
   @Override

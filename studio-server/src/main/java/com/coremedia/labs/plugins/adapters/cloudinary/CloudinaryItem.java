@@ -34,7 +34,7 @@ class CloudinaryItem extends BaseFileSystemItem implements Item {
   @NonNull
   @Override
   public String getName() {
-    return getDisplayName();
+    return asset.getName();
   }
 
   @Nullable
@@ -133,11 +133,7 @@ class CloudinaryItem extends BaseFileSystemItem implements Item {
   @NonNull
   @Override
   public String getDisplayName() {
-    String itemType = getItemType();
-    if (itemType.equals("default")) {
-      return getName();
-    }
-    return asset.getName();
+    return getName();
   }
 
   @Nullable

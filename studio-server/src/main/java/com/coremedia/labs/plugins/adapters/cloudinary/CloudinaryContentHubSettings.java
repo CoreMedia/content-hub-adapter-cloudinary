@@ -52,6 +52,13 @@ public interface CloudinaryContentHubSettings {
   String getImportPublicIdAs();
 
   /**
+   * Returns the Cloudinary query to use for search.
+   * Use "%1$s" to refer to the query term entered by the user.
+   * Defaults to "filename=%1$s"
+   */
+  String getSearchQuery();
+
+  /**
    * Returns whether the blob of a Video should be imported.
    * Defaults to true for backwards compatibility.
    * @return

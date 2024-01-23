@@ -7,7 +7,6 @@ import com.coremedia.mimetype.TikaMimeTypeService;
 import com.coremedia.util.TempFileFactory;
 import edu.umd.cs.findbugs.annotations.NonNull;
 import edu.umd.cs.findbugs.annotations.Nullable;
-import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,12 +18,12 @@ import java.util.*;
 class CloudinaryContentHubTransformer implements ContentHubTransformer {
   private static final Logger LOG = LoggerFactory.getLogger(CloudinaryContentHubTransformer.class);
 
-  private final CloudinaryImportOptions importOptions;
+  private final CloudinaryOptions cloudinaryOptions;
 
   private TikaMimeTypeService tikaMimeTypeService;
 
-  public CloudinaryContentHubTransformer(@NonNull CloudinaryImportOptions importOptions) {
-    this.importOptions = importOptions;
+  public CloudinaryContentHubTransformer(@NonNull CloudinaryOptions cloudinaryOptions) {
+    this.cloudinaryOptions = cloudinaryOptions;
   }
 
   @Override
@@ -56,11 +55,11 @@ class CloudinaryContentHubTransformer implements ContentHubTransformer {
 
   @NonNull
   private ContentModel transformCloudinaryItem(CloudinaryItem item) {
-    String contentName = FilenameUtils.removeExtension(item.getName());
+    String contentName = item.getName();
     ContentModel contentModel = ContentModel.createContentModel(contentName, item.getId(), item.getCoreMediaContentType());
 
     contentModel.put("title", contentName);
-    String importPublicIdAs = importOptions.getImportPublicIdAs();
+    String importPublicIdAs = cloudinaryOptions.getImportPublicIdAs();
     if (importPublicIdAs != null && !importPublicIdAs.isEmpty())
       contentModel.put(importPublicIdAs, item.getAsset().getPublicId());
 
@@ -87,7 +86,7 @@ class CloudinaryContentHubTransformer implements ContentHubTransformer {
       // handling for Videos import options
       String type = item.getCoreMediaContentType();
       // check if we are importing the blob
-      if (!type.equals("CMVideo") || importOptions.isImportVideoBlob()) {
+      if (!type.equals("CMVideo") || cloudinaryOptions.isImportVideoBlob()) {
         InputStream stream = item.stream(true);
         BlobServiceImpl blobService = new BlobServiceImpl(new TempFileFactory(), getTika());
         Blob blob = blobService.fromInputStream(stream, getTika().getMimeTypeForResourceName(item.getName() + "." + item.getFormat()));
@@ -97,7 +96,7 @@ class CloudinaryContentHubTransformer implements ContentHubTransformer {
         }
       }
       // check if we are importing the URL
-      if(type.equals("CMVideo") && importOptions.isImportVideoURL()) {
+      if(type.equals("CMVideo") && cloudinaryOptions.isImportVideoURL()) {
         result.put("dataUrl", item.getAsset().getSecureUrl());
       }
       return result;

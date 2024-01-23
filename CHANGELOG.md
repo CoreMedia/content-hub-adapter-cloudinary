@@ -3,22 +3,23 @@
 ## 2.0.3
 * Improved browse mode with pagination support
 * Rudimentary support for search (on filename)
-* Import options
+* New configuration options
   * Options for using asset_id as externalRefId (experimental)  
     * assetIdModeEnabled (String: true/false, default false)
     * importPublicIdAs (String: name of property, default null)
+  * Option to configure search query expression
+    * searchQuery(String: query expression, default filename=%1$s)   
   * Options to control video import behaviour
     * importVideoBlob (String: true/false, default true)
     * importVideoURL (String: true/false, default false)
   * Options to control image import behaviour 
     * importImageMaxWidth (Integer, default null)
     * importImageQuality (Integer, 1-100, default null)
-* Experimental support for using asset_id as externalRefId
+* Experimental support for using asset_id as externalRefId, see above
 * Other enhancements and bugfixes 
   * Thumbnail preview for Videos
   * Display asset size in preview 
   * Correct Breadcrumb in Studio Library
-* Updated to use latest CMCC 11 dependencies
 * Updated to use Cloudinary API version 1.37.0 
 
 ## 2.0.0

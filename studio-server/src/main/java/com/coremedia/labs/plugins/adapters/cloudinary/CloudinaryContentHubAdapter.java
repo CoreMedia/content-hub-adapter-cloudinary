@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 class CloudinaryContentHubAdapter implements ContentHubAdapter {
   private static final Logger LOG = LoggerFactory.getLogger(CloudinaryContentHubTransformer.class);
   private final CloudinaryContentHubSettings settings;
-  private final CloudinaryImportOptions importOptions;
+  private final CloudinaryOptions cloudinaryOptions;
   private final String connectionId;
   private final CloudinaryService cloudinaryService;
   private final ContentHubMimeTypeService mimeTypeService;
@@ -42,9 +42,9 @@ class CloudinaryContentHubAdapter implements ContentHubAdapter {
     String cloudName = settings.getCloudName();
     String apiSecret = settings.getApiSecret();
     String uploadPrefix = settings.getUploadPrefix();
-    // parse import options configuration
-    importOptions = new CloudinaryImportOptions(settings);
-    LOG.info("Starting CloudinaryContentHubAdapter with " + importOptions);
+    // parse configuration
+    cloudinaryOptions = new CloudinaryOptions(settings);
+    LOG.info("Starting CloudinaryContentHubAdapter with " + cloudinaryOptions);
 
     if (apiKey == null || apiSecret == null || cloudName == null) {
       throw new ContentHubException("Invalid configuration for connector 'Cloudinary', ensure that apiKey, apiSecret and cloudName is set.");
@@ -56,7 +56,7 @@ class CloudinaryContentHubAdapter implements ContentHubAdapter {
             "api_secret", apiSecret);
     if (uploadPrefix != null)
       cloudinaryConfig.put("upload_prefix", uploadPrefix);
-    this.cloudinaryService = new CloudinaryService(new Cloudinary(cloudinaryConfig), importOptions);
+    this.cloudinaryService = new CloudinaryService(new Cloudinary(cloudinaryConfig), cloudinaryOptions);
   }
 
   @NonNull
@@ -146,7 +146,6 @@ class CloudinaryContentHubAdapter implements ContentHubAdapter {
 
   private Folder getParentForItem(@NonNull CloudinaryItem item, @NonNull ContentHubContext context) {
     String path = item.getAsset().getPublicId();
-    path = item.getAsset().getPublicId();
     int lastPathDelimiter = path.lastIndexOf('/');
     // handle folders/items in root folder
     if (lastPathDelimiter == -1)
@@ -162,7 +161,7 @@ class CloudinaryContentHubAdapter implements ContentHubAdapter {
   @Override
   @NonNull
   public ContentHubTransformer transformer() {
-    return new CloudinaryContentHubTransformer(importOptions);
+    return new CloudinaryContentHubTransformer(cloudinaryOptions);
   }
 
 
@@ -202,8 +201,8 @@ class CloudinaryContentHubAdapter implements ContentHubAdapter {
 
   @Override
   public Optional<ContentHubSearchService> searchService() {
-    return Optional.of(new CloudinarySearchService(cloudinaryService, connectionId,
-            mimeTypeService, itemTypeToContentTypeMapping));
+    return Optional.of(new CloudinarySearchService(cloudinaryService, cloudinaryOptions,
+            connectionId, mimeTypeService, itemTypeToContentTypeMapping));
   }
 
 }
