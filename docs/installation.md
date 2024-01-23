@@ -56,9 +56,30 @@ and restart the studio server.
 
 ## Configure the Plugin
 
-Once having activated the plugin as described above, you can establish the connection to the external system by adding a Settings content to the site, globally, or the user's home folder. The general Content Hub configuration is described in the [Studio Developer Manual](https://documentation.coremedia.com/cmcc-10/artifacts/2107/webhelp/studio-developer-en/content/Content_HubAdapterConfiguration.html). Additional adapter-specific configuration is shown in the screenshot below:
+Once having activated the plugin as described above, you can establish the connection to the external system by adding a Settings content to the site, globally, or the user's home folder. The general Content Hub configuration is described in the [Studio Developer Manual](https://documentation.coremedia.com/cmcc-10/artifacts/2107/webhelp/studio-developer-en/content/Content_HubAdapterConfiguration.html). 
+Additional adapter-specific configuration is shown in the screenshot below:
 
 ![Image1: Adapter-specific configuration](images/editorial/editorial-documentation_2.png)
+
+The following table provides an overview of the configuration options
+
+| Name              | Type    | Required | Default                    | Comment                                                                                                       |
+|-------------------|---------|----------|----------------------------|---------------------------------------------------------------------------------------------------------------| 
+| connectionId      | String  | yes      |                            | Generic Content Hub configuration. Do not change after import.                                                |
+| factoryId         | String  | yes      |                            | Generic Content Hub configuration. Needs to be "cloudinary".                                                  |      
+| enabled           | Boolean | yes      |                            | Generic Content Hub configuration. Enable/disable adapter.                                                    | 
+| displayName       | String  | yes |                            | Shown in Studio Library.                                                                                      |
+| cloudName         | String  | yes |                            | Name of Cloudinary Cloud for API connection.                                                                  |
+| apiKey            | String  | yes |                            | apiKey for API connection.                                                                                    |
+| apiSecret         | String  | yes |                            | apiSecret for API connection.                                                                                 |
+| uploadPrefix      | String  | no | https://api.cloudinary.com | Alternative API endpoint to use, e.g. https://api-eu.cloudinary.com.                                          |       | 
+| assetIdModeEnabled | String | no | false | Use asset_id as externalRefId. Do not change after import.                                                    |
+| importPublicIdAs  | String | no | | Import public_id to the given property.                                                                       |                             |
+| searchQuery | String | no | filename=%1$s | Query expression for search. Use %1$s as placeholder for search term.                                         | 
+| importVideoBlob | String | no | true | Whether to import the video blob data.                                                                        |
+| importVideoURL | String | no | false | Whether to import the video blob URL.                                                                         |
+| importImageMaxWith | Integer | no | | Scale down image upon import if needed.                                                                       |
+| importImageQuality | Integer | no | | Import image with lower quality (1-100) upon import. Not applied id image scaled down already via importImageMaxWith. |
 
 ## Intellij IDEA Hints
 
