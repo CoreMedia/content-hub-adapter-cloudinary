@@ -1,24 +1,17 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-
 <head>
-<!-- start of server/head-include-1.html -->
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<link rev="made" href="mailto:webmasters@gnu.org" />
+<link rel="author" href="mailto:webmasters@gnu.org" />
 <link rel="icon" type="image/png" href="/graphics/gnu-head-mini.png" />
 <meta name="ICBM" content="42.355469,-71.058627" />
-<meta name="DC.title" content="gnu.org" />
-<link rel="stylesheet" type="text/css" href="/reset.css" media="screen" />
-<link rel="stylesheet" type="text/css" href="/mini.css" media="handheld" />
 <link rel="stylesheet" type="text/css" href="/layout.min.css" media="screen" />
 <link rel="stylesheet" type="text/css" href="/print.min.css" media="print" />
-<link rel="stylesheet" type="text/css" href="/speech.css" media="speech" />
-<!-- end of server/head-include-1.html -->
 
-<!-- end of server/header.html -->
 
-<!-- Parent-Version: 1.84 -->
+
+<!-- Parent-Version: 1.98 -->
+<!-- This page is derived from /server/standards/boilerplate.html -->
 <title>GNU Lesser General Public License v2.1 - GNU Project - Free Software Foundation</title>
 <link rel="alternate" type="application/rdf+xml" href="lgpl-2.1.rdf" /> 
 <!-- begin translist file -->
@@ -31,34 +24,25 @@
 <link rel="alternate" type="text/html" lang="pt-br" hreflang="pt-br" href="/licenses/old-licenses/lgpl-2.1.pt-br.html" title="português" />
 <link rel="alternate" type="text/html" lang="ru" hreflang="ru" href="/licenses/old-licenses/lgpl-2.1.ru.html" title="русский" />
 <link rel="alternate" type="text/html" lang="uk" hreflang="uk" href="/licenses/old-licenses/lgpl-2.1.uk.html" title="українська" />
+<link rel="alternate" type="text/html" lang="zh-cn" hreflang="zh-cn" href="/licenses/old-licenses/lgpl-2.1.zh-cn.html" title="简体中文" />
 <!-- end translist file -->
 
 <!-- start of server/banner.html -->
 <!-- start of head-include-2.html -->
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<style type="text/css" media="screen">
-@media (min-width: 0) {
-   a#more-links:after { content: "More\00A0\002B9F"; }
-   a#less-links:after { content: "\002B9D"; }
-}
-</style>
 <!-- end of head-include-2.html -->
 
 </head>
 <body>
 <div class="inner">
 <!-- start of server/body-include-1.html -->
-<div>
+<div id="top">
 <a class="skip" href="#content"><b>Skip to main text</b></a>
 </div>
 
-<div id="fsf-frame">
-<div id="join-fsf" class="button"><a
-href="https://www.fsf.org/associate/support_freedom?referrer=4052">JOIN&nbsp;THE&nbsp;FSF</a>
-</div>
-
+<div id="fsf-frame" role="complementary">
 <form id="fssbox" action="https://my.fsf.org/civicrm/profile/create?reset=1&amp;gid=31"
-      method="post" class="header">
+      method="post">
  <div>
   <input name="postURL" type="hidden" value="" />
   <input type="hidden" name="group[25]" value="1" />
@@ -72,13 +56,16 @@ href="https://www.fsf.org/associate/support_freedom?referrer=4052">JOIN&nbsp;THE
   <input type="submit" name="_qf_Edit_next" value="Sign up" />
  </div>
 </form>
-<div style="clear: both"></div>
+
+<div id="join-fsf" class="button"><a
+href="https://www.fsf.org/associate/support_freedom?referrer=4052">JOIN&nbsp;THE&nbsp;FSF</a>
+</div>
 </div>
 
-<div id="header">
+<div id="header" role="banner">
 <p id="gnu-banner">
  <a href="/">
- <img src="/graphics/heckert_gnu.transp.small.png" height="48"
+ <img src="/graphics/heckert_gnu.transp.small.png" height="48" width="49"
       alt="&nbsp;[A GNU head]&nbsp;" /><strong>GNU</strong> <span
  class="hide">Operating System</span></a><br />
  <small id="fsf-support">Supported by the
@@ -86,16 +73,19 @@ href="https://www.fsf.org/associate/support_freedom?referrer=4052">JOIN&nbsp;THE
 </p>
 
 <div id="switches">
- <a id="search-button" class="switch" href="//www.gnu.org/cgi-bin/estseek.cgi">
-  <img id="search-icon" height="32"
+ <div  id="search-button" class="switch">
+  <a href="//www.gnu.org/cgi-bin/estseek.cgi">
+  <img id="search-icon" height="30" width="30"
        src="/graphics/icons/search.png"
        alt="&nbsp;[Search www.gnu.org]&nbsp;" /></a>
+ </div>
 
- <a id="language-button" class="switch" href="#language-container">
-  <img id="language-icon" height="32"
+ <div id="language-button" class="switch">
+  <a href="#language-container">
+  <img id="language-icon" height="30" width="37"
        src="/graphics/icons/translations.png"
-       alt="&nbsp;[Languages]&nbsp;" />
- </a>
+       alt="&nbsp;[Other languages]&nbsp;" /></a>
+ </div>
 
 </div>
 </div>
@@ -105,9 +95,11 @@ href="https://www.fsf.org/associate/support_freedom?referrer=4052">JOIN&nbsp;THE
 
 
 <div style="clear: both"></div>
-<div id="navigation">
- <a id="more-links" href="#navigation"></a>
- <a id="less-links" href="#tabAboutGNU"></a>
+
+<div id="navigation" role="navigation">
+ <a id="more-links" href="#navigation" title="More...">
+   <span>Site navigation</span></a>
+ <a id="less-links" href="#content"><b>Skip</b></a>
  <ul>
 
    <li id="tabAboutGNU"><a href="/gnu/gnu.html">ABOUT&nbsp;GNU</a></li>
@@ -130,6 +122,9 @@ href="https://www.fsf.org/associate/support_freedom?referrer=4052">JOIN&nbsp;THE
   <li id="tabSoftware"><a href="/software/software.html">SOFTWARE</a></li>
 
 
+  <li id="tabDistros"><a href="/distros/distros.html">DISTROS</a></li>
+
+
   <li id="tabDoc"><a href="/doc/doc.html">DOCS</a></li>
 
 
@@ -139,23 +134,33 @@ href="https://www.fsf.org/associate/support_freedom?referrer=4052">JOIN&nbsp;THE
   <li id="tabHelp"><a href="/help/help.html">HELP&nbsp;GNU</a></li>
 
 
+  <li id="tabAV"><a href="/audio-video/audio-video.html">AUDIO&nbsp;&amp;&nbsp;VIDEO</a></li>
+
+
   <li id="tabArt"><a href="/graphics/graphics.html">GNU&nbsp;ART</a></li>
+
+
+  <li id="tabFun"><a href="/fun/humor.html">FUN</a></li>
 
 
   <li id="tabPeople"><a href="/people/people.html">GNU'S&nbsp;WHO?</a></li>
 
-  <li><a href="/server/sitemap.html">SITEMAP</a></li>
   <li><a href="//directory.fsf.org">SOFTWARE&nbsp;DIRECTORY</a></li>
   <li><a href="https://h-node.org/">HARDWARE</a></li>
+  <li><a href="/server/sitemap.html">SITEMAP</a></li>
  </ul>
  <div style="clear: both"></div>
 </div><!-- /"navigation -->
 <!-- end of server/body-include-2 -->
 
-<div id="content">
+<div id="content" role="main">
 <!-- end of server/banner.html -->
 
-<h2>GNU Lesser General Public License, version 2.1</h2>
+<div class="reduced-width">
+<h2>GNU Lesser General Public License, version&nbsp;2.1</h2>
+
+<p class="button" style="margin: 2em 1.5em">
+  <b><a href="#SEC1">Skip to license text</a></b></p>
 
 <ul>
   <li><a href="/licenses/lgpl.html">The latest version of the LGPL, version
@@ -180,7 +185,7 @@ href="https://www.fsf.org/associate/support_freedom?referrer=4052">JOIN&nbsp;THE
     the LGPL</a></li>
 </ul>
 
-<hr />
+<div class="thin"></div>
 
 <p>This GNU Lesser General Public License counts as the successor of the GNU
 Library General Public License. For an explanation of why this change was
@@ -200,14 +205,13 @@ the Lesser GPL for your next library</a> article.</p>
   </li>
 </ul>
 
-<hr style="clear: both;" />
+<hr class="thin" />
 
 <!-- The license text is in English and appears broken in RTL as
 Arabic, Farsi, etc. Explicitly set the direction to override the
 one defined in the translation. -->
-
 <div dir="ltr">
-<h3><a id="SEC1">GNU LESSER GENERAL PUBLIC LICENSE</a></h3>
+<h3 id="SEC1">GNU LESSER GENERAL PUBLIC LICENSE</h3>
 <p>
 Version 2.1, February 1999
 </p>
@@ -224,7 +228,7 @@ of this license document, but changing it is not allowed.
 </pre>
 
 
-<h3><a id="SEC2">Preamble</a></h3>
+<h4 id="SEC2">Preamble</h4>
 
 <p>
   The licenses for most software are designed to take away your
@@ -342,8 +346,7 @@ former contains code derived from the library, whereas the latter must
 be combined with the library in order to run.
 </p>
 
-<h3><a id="SEC3">TERMS AND CONDITIONS FOR COPYING,
-DISTRIBUTION AND MODIFICATION</a></h3>
+<h4 id="SEC3">TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION</h4>
 
 
 <p>
@@ -759,10 +762,9 @@ SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH
 DAMAGES.
 </p>
 
-<h3>END OF TERMS AND CONDITIONS</h3>
+<h4>END OF TERMS AND CONDITIONS</h4>
 
-<h3><a id="SEC4">How to Apply These Terms to Your New
-Libraries</a></h3>
+<h4 id="SEC4">How to Apply These Terms to Your New Libraries</h4>
 <p>
   If you develop a new library, and you want it to be of the greatest
 possible use to the public, we recommend making it free software that
@@ -818,6 +820,7 @@ Ty Coon, President of Vice
 That's all there is to it!</p>
 
 </div>
+</div>
 
 </div><!-- for id="content", starts in the include above -->
 
@@ -831,13 +834,14 @@ That's all there is to it!</p>
 
 
 <div id="language-container">
- <a href="#" class="close"></a>
+ <div class="backtotop">
+  <hr class="no-display" />
+  <a href="#top"><b>&#9650;</b></a>
+ </div>
  <div id="languages" class="rounded-corners">
-  <div class="backtotop">
-   <hr class="no-display" />
-   <a href="#header"><span>BACK TO TOP </span>&#11165;</a>
+  <div class="button">
+   <a href="#top" class="close"><span>BACK TO TOP</span></a>
   </div>
-  <a href="#" class="close"></a>
   <div id="set-language" class="button">
    <span class="gnun-split"></span>
    <a href="/server/select-language.html?callback=/licenses/old-licenses/lgpl-2.1.en.html" rel="nofollow">
@@ -855,20 +859,22 @@ That's all there is to it!</p>
 <span dir="ltr">[pt-br]&nbsp;<a lang="pt-br" hreflang="pt-br" href="/licenses/old-licenses/lgpl-2.1.pt-br.html">português</a> &nbsp;</span>
 <span dir="ltr">[ru]&nbsp;<a lang="ru" hreflang="ru" href="/licenses/old-licenses/lgpl-2.1.ru.html">русский</a> &nbsp;</span>
 <span dir="ltr">[uk]&nbsp;<a lang="uk" hreflang="uk" href="/licenses/old-licenses/lgpl-2.1.uk.html">українська</a> &nbsp;</span>
+<span dir="ltr">[zh-cn]&nbsp;<a lang="zh-cn" hreflang="zh-cn" href="/licenses/old-licenses/lgpl-2.1.zh-cn.html">简体中文</a> &nbsp;</span>
 </p>
 </div>
  </div>
 </div>
 
-<div id="mission-statement">
+<div id="mission-statement" role="complementary">
  <div class="backtotop">
   <hr class="no-display" />
-  <a href="#header"><span>BACK TO TOP </span>&#11165;</a>
+  <a href="#header"><span>BACK TO TOP </span>&#9650;</a>
  </div>
 <div style="clear: both"></div>
 <blockquote>
 <p style="direction:ltr; text-align:left"><a href="//www.fsf.org"><img id="fsfbanner"
-src="/graphics/fsf-logo-notext-small.png" alt="&nbsp;[FSF logo]&nbsp;"/></a><strong>
+src="/graphics/fsf-logo-notext-small.png" alt="&nbsp;[FSF logo]&nbsp;"
+width="75" height="25" /></a><strong>
 &ldquo;The Free Software Foundation (FSF) is a nonprofit with a worldwide
 mission to promote computer user freedom. We defend the rights of all
 software users.&rdquo;</strong></p>
@@ -883,7 +889,7 @@ software users.&rdquo;</strong></p>
 <!-- end server/footer-text.html -->
 
 
-<div id="footer">
+<div id="footer" role="contentinfo">
 <div class="unprintable">
 
 <p>Please send general FSF &amp; GNU inquiries to
@@ -901,13 +907,13 @@ to <a href="mailto:webmasters@gnu.org">&lt;webmasters@gnu.org&gt;</a>.</p>
         to <a href="mailto:web-translators@gnu.org">
         &lt;web-translators@gnu.org&gt;</a>.</p>
 
-        <p>For information on coordinating and submitting translations of
+        <p>For information on coordinating and contributing translations of
         our web pages, see <a
         href="/server/standards/README.translations.html">Translations
         README</a>. -->
 Please see the <a
 href="/server/standards/README.translations.html">Translations
-README</a> for information on coordinating and submitting translations
+README</a> for information on coordinating and contributing translations
 of this article.</p>
 </div>
 
@@ -926,9 +932,9 @@ of this article.</p>
 
 <p class="unprintable">Updated:
 <!-- timestamp start -->
-$Date: 2018/02/14 15:57:20 $
+$Date: 2023/11/30 09:46:01 $
 <!-- timestamp end --></p>
 </div>
-</div>
+</div><!-- for class="inner", starts in the banner include -->
 </body>
 </html>

@@ -1,13 +1,11 @@
 
-Lists of 11 third-party dependencies.
-     (MIT) Cloudinary Core Library (com.cloudinary:cloudinary-core:1.26.0 - http://github.com/cloudinary/cloudinary_java)
-     (MIT) Cloudinary Apache HTTP 4.4 Library (com.cloudinary:cloudinary-http44:1.26.0 - http://github.com/cloudinary/cloudinary_java)
+Lists of 9 third-party dependencies.
+     (MIT) Cloudinary Core Library (com.cloudinary:cloudinary-core:1.37.0 - http://github.com/cloudinary/cloudinary_java)
+     (MIT) Cloudinary Apache HTTP 4.5 Library (com.cloudinary:cloudinary-http45:1.37.0 - http://github.com/cloudinary/cloudinary_java)
      (GNU LESSER GENERAL PUBLIC LICENSE, Version 2.1) SpotBugs Annotations (com.github.spotbugs:spotbugs-annotations:3.1.5 - https://spotbugs.github.io/)
      (EDL 1.0) Jakarta Activation (com.sun.activation:jakarta.activation:1.2.2 - https://github.com/eclipse-ee4j/jaf/jakarta.activation)
-     (Apache License, Version 2.0) Apache Commons IO (commons-io:commons-io:2.8.0 - https://commons.apache.org/proper/commons-io/)
-     (Unknown license) ext-as (net.jangaroo:ext-as:7.2.0-2 - http://nexus.sonatype.org/oss-repository-hosting.html/ext-as)
-     (Apache License, Version 2.0) Apache HttpClient (org.apache.httpcomponents:httpclient:4.5.13 - http://hc.apache.org/httpcomponents-client)
-     (Apache License, Version 2.0) Apache HttpCore (org.apache.httpcomponents:httpcore:4.4.13 - http://hc.apache.org/httpcomponents-core-ga)
-     (MIT License) SLF4J API Module (org.slf4j:slf4j-api:1.7.30 - http://www.slf4j.org)
-     (Apache License, Version 2.0) Spring Context (org.springframework:spring-context:5.2.9.RELEASE - https://github.com/spring-projects/spring-framework)
-     (Apache License, Version 2.0) Spring Web (org.springframework:spring-web:5.2.9.RELEASE - https://github.com/spring-projects/spring-framework)
+     (Apache License, Version 2.0) Apache Commons IO (commons-io:commons-io:2.11.0 - https://commons.apache.org/proper/commons-io/)
+     (Apache License, Version 2.0) Apache HttpClient (org.apache.httpcomponents:httpclient:4.5.14 - http://hc.apache.org/httpcomponents-client-ga)
+     (Apache License, Version 2.0) Apache HttpCore (org.apache.httpcomponents:httpcore:4.4.16 - http://hc.apache.org/httpcomponents-core-ga)
+     (MIT License) SLF4J API Module (org.slf4j:slf4j-api:1.7.36 - http://www.slf4j.org)
+     (Apache License, Version 2.0) Spring Context (org.springframework:spring-context:5.3.31 - https://github.com/spring-projects/spring-framework)

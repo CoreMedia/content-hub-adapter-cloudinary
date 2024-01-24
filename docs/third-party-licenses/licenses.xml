@@ -4,7 +4,7 @@
     <dependency>
       <groupId>com.cloudinary</groupId>
       <artifactId>cloudinary-core</artifactId>
-      <version>1.26.0</version>
+      <version>1.37.0</version>
       <licenses>
         <license>
           <name>MIT</name>
@@ -15,8 +15,8 @@
     </dependency>
     <dependency>
       <groupId>com.cloudinary</groupId>
-      <artifactId>cloudinary-http44</artifactId>
-      <version>1.26.0</version>
+      <artifactId>cloudinary-http45</artifactId>
+      <version>1.37.0</version>
       <licenses>
         <license>
           <name>MIT</name>
@@ -53,7 +53,7 @@
     <dependency>
       <groupId>commons-io</groupId>
       <artifactId>commons-io</artifactId>
-      <version>2.6</version>
+      <version>2.11.0</version>
       <licenses>
         <license>
           <name>Apache License, Version 2.0</name>
@@ -64,17 +64,9 @@
       </licenses>
     </dependency>
     <dependency>
-      <groupId>net.jangaroo</groupId>
-      <artifactId>ext-as</artifactId>
-      <version>7.2.0-1</version>
-      <licenses>
-        <!-- No license information available. -->
-      </licenses>
-    </dependency>
-    <dependency>
       <groupId>org.apache.httpcomponents</groupId>
       <artifactId>httpclient</artifactId>
-      <version>4.5.12</version>
+      <version>4.5.14</version>
       <licenses>
         <license>
           <name>Apache License, Version 2.0</name>
@@ -87,7 +79,7 @@
     <dependency>
       <groupId>org.apache.httpcomponents</groupId>
       <artifactId>httpcore</artifactId>
-      <version>4.4.13</version>
+      <version>4.4.16</version>
       <licenses>
         <license>
           <name>Apache License, Version 2.0</name>
@@ -100,7 +92,7 @@
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
-      <version>1.7.30</version>
+      <version>1.7.36</version>
       <licenses>
         <license>
           <name>MIT License</name>
@@ -113,20 +105,7 @@
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-context</artifactId>
-      <version>5.2.7.RELEASE</version>
-      <licenses>
-        <license>
-          <name>Apache License, Version 2.0</name>
-          <url>https://www.apache.org/licenses/LICENSE-2.0</url>
-          <distribution>repo</distribution>
-          <file>apache license, version 2.0 - license-2.0.txt</file>
-        </license>
-      </licenses>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-web</artifactId>
-      <version>5.2.7.RELEASE</version>
+      <version>5.3.31</version>
       <licenses>
         <license>
           <name>Apache License, Version 2.0</name>
