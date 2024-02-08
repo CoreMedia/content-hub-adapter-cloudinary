@@ -114,7 +114,9 @@ class CloudinaryContentHubAdapter implements ContentHubAdapter {
       subFolders = getSubFolders(realFolder, context);
       assets = getChildItems(realFolder.getCategory().getPath(), context, cursor);
     }
-    children.addAll(subFolders);
+    // only return subfolders for initial request
+    if(paginationRequest == null)
+      children.addAll(subFolders);
     children.addAll(assets.getChildren());
     PaginationResponse assetsPaginationResponse = assets.getPaginationResponse();
     int totalCount = subFolders.size() + assetsPaginationResponse.getTotalCount();
