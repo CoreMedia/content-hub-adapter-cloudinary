@@ -13,12 +13,12 @@ interface ContentHubCloudinary_properties {
  */
   author_header: string;
   lastModified_header: string;
-  folder_type_cloudinary_folder_name : string;
-  folder_type_cloudinary_folder_icon : string;
-  adapter_type_cloudinary_name : string;
+  folder_type_cloudinary_folder_name: string;
+  folder_type_cloudinary_folder_icon: string;
+  adapter_type_cloudinary_name: string;
   adapter_type_cloudinary_icon: string;
-  item_type_cloudinary_file_name : string;
-  item_type_cloudinary_file_icon : string;
+  item_type_cloudinary_file_name: string;
+  item_type_cloudinary_file_icon: string;
 
   metadata_sectionName: string;
   text_sectionItemKey: string;
@@ -37,12 +37,12 @@ interface ContentHubCloudinary_properties {
 const ContentHubCloudinary_properties: ContentHubCloudinary_properties = {
   author_header: "Author",
   lastModified_header: "Last Modified",
-  folder_type_cloudinary_folder_name : "Folder",
-  folder_type_cloudinary_folder_icon : CoreIcons_properties.folder,
-  adapter_type_cloudinary_name : "Cloudinary",
+  folder_type_cloudinary_folder_name: "Folder",
+  folder_type_cloudinary_folder_icon: CoreIcons_properties.folder,
+  adapter_type_cloudinary_name: "Cloudinary",
   adapter_type_cloudinary_icon: SvgIconUtil.getIconStyleClassForSvgIcon(icon),
-  item_type_cloudinary_file_name : "File",
-  item_type_cloudinary_file_icon : CoreIcons_properties.type_external_content,
+  item_type_cloudinary_file_name: "File",
+  item_type_cloudinary_file_icon: CoreIcons_properties.type_external_content,
 
   metadata_sectionName: "Metadata",
   text_sectionItemKey: "Text",
