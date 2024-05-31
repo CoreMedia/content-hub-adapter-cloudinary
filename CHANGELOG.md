@@ -3,7 +3,7 @@
 ## 2.0.4
 
 - Use Java 17 SDK
-- Use Node 20
+- Use Node 18.x
 - Compatible CoreMedia Content Cloud version: `2401.3`
 
 ## 2.0.3
