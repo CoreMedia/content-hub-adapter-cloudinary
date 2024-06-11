@@ -12,8 +12,8 @@
     <maven.compiler.release>11</maven.compiler.release>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <cm.studio-server.core.version>2310.2</cm.studio-server.core.version>
-    <cm.common.core.version>2310.2</cm.common.core.version>
+    <cm.studio-server.core.version>2401.3</cm.studio-server.core.version>
+    <cm.common.core.version>2401.3</cm.common.core.version>
     <cloudinary.version>1.37.0</cloudinary.version>
     <org.apache.httpclient.version>4.5.14</org.apache.httpclient.version>
     <org.apache.httpcore.version>4.4.16</org.apache.httpcore.version>
@@ -67,9 +67,10 @@
 
   <dependencies>
     <dependency>
-      <groupId>com.sun.activation</groupId>
-      <artifactId>jakarta.activation</artifactId>
-      <version>1.2.2</version>
+      <groupId>jakarta.activation</groupId>
+      <artifactId>jakarta.activation-api</artifactId>
+      <version>2.1.2</version>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>com.coremedia.cms</groupId>
