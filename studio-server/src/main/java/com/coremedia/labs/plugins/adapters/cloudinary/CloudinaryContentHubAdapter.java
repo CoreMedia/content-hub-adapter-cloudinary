@@ -2,6 +2,7 @@ package com.coremedia.labs.plugins.adapters.cloudinary;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
+import com.coremedia.cap.common.BlobService;
 import com.coremedia.contenthub.api.*;
 import com.coremedia.contenthub.api.exception.ContentHubException;
 import com.coremedia.contenthub.api.pagination.PaginationRequest;
@@ -22,20 +23,25 @@ import java.util.stream.Collectors;
 
 class CloudinaryContentHubAdapter implements ContentHubAdapter {
   private static final Logger LOG = LoggerFactory.getLogger(CloudinaryContentHubTransformer.class);
+
   private final CloudinaryContentHubSettings settings;
-  private final CloudinaryOptions cloudinaryOptions;
   private final String connectionId;
-  private final CloudinaryService cloudinaryService;
   private final ContentHubMimeTypeService mimeTypeService;
+  private final BlobService blobService;
   private final Map<ContentHubType, String> itemTypeToContentTypeMapping;
+
+  private final CloudinaryOptions cloudinaryOptions;
+  private final CloudinaryService cloudinaryService;
 
   CloudinaryContentHubAdapter(@NonNull CloudinaryContentHubSettings settings,
                               @NonNull String connectionId,
                               @NonNull ContentHubMimeTypeService mimeTypeService,
+                              @NonNull BlobService blobService,
                               @NonNull Map<ContentHubType, String> itemTypeToContentTypeMapping) {
     this.settings = settings;
     this.connectionId = connectionId;
     this.mimeTypeService = mimeTypeService;
+    this.blobService = blobService;
     this.itemTypeToContentTypeMapping = itemTypeToContentTypeMapping;
 
     String apiKey = settings.getApiKey();
@@ -163,9 +169,8 @@ class CloudinaryContentHubAdapter implements ContentHubAdapter {
   @Override
   @NonNull
   public ContentHubTransformer transformer() {
-    return new CloudinaryContentHubTransformer(cloudinaryOptions);
+    return new CloudinaryContentHubTransformer(cloudinaryOptions, blobService, mimeTypeService);
   }
-
 
   private List<ContentHubObject> getRootFolders(ContentHubContext context) {
     CloudinaryFolder rootFolder = (CloudinaryFolder) getRootFolder(context);

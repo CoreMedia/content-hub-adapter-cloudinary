@@ -67,14 +67,13 @@
 
   <dependencies>
     <dependency>
-      <groupId>jakarta.activation</groupId>
-      <artifactId>jakarta.activation-api</artifactId>
-      <version>2.1.2</version>
+      <groupId>com.coremedia.cms</groupId>
+      <artifactId>cap-unified-api</artifactId>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>com.coremedia.cms</groupId>
-      <artifactId>cap-unified-api</artifactId>
+      <artifactId>common.beans-for-plugins-container</artifactId>
       <scope>provided</scope>
     </dependency>
     <dependency>
@@ -88,6 +87,11 @@
       <scope>provided</scope>
     </dependency>
 
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-beans</artifactId>
+      <scope>provided</scope>
+    </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-context</artifactId>
