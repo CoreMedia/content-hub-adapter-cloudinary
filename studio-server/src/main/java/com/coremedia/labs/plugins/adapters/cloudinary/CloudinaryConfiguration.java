@@ -1,9 +1,9 @@
 package com.coremedia.labs.plugins.adapters.cloudinary;
 
-import com.coremedia.contenthub.api.BaseFileSystemConfiguration;
 import com.coremedia.contenthub.api.ContentHubAdapterFactory;
 import com.coremedia.contenthub.api.ContentHubMimeTypeService;
 import com.coremedia.contenthub.api.ContentHubType;
+import com.coremedia.contenthub.beans_for_plugins.ContentHubBeansForPluginsConfiguration;
 import edu.umd.cs.findbugs.annotations.NonNull;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Import;
 import java.util.Map;
 
 @Configuration
-@Import({BaseFileSystemConfiguration.class})
+@Import({ContentHubBeansForPluginsConfiguration.class})
 public class CloudinaryConfiguration {
 
   private static Map<ContentHubType, String> typeMapping() {

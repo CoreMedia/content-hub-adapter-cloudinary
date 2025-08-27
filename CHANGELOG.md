@@ -1,7 +1,10 @@
 # Changelog
 
+## 2.0.5
+- Removed deprecated import of `BaseFileSystemConfiguration`
+- Compatible CoreMedia Content Cloud version: `2506.0.0`
+ 
 ## 2.0.4
-
 - Use Java 17 SDK
 - Use Node 18.x
 - Compatible CoreMedia Content Cloud version: `2401.3`
