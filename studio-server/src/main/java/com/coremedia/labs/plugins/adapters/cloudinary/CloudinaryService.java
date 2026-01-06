@@ -164,7 +164,7 @@ public class CloudinaryService {
       int statusCode = response.getStatusLine().getStatusCode();
       if (statusCode > 200) {
         String result = IOUtils.toString(ent.getContent(), StandardCharsets.UTF_8);
-        LOG.error("Error getting Cloudinary resource: " + result);
+        LOG.error("Cloudinary request for {} failed with status code {} and response '{}'.", url, statusCode, result);
       } else {
         return ent.getContent();
       }
